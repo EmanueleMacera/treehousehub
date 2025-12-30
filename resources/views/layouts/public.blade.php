@@ -8,12 +8,17 @@
 <body>
 <header>
     <nav>
-        <a href="{{ route('home') }}">{{ __('nav.home') }}</a>
-        <a href="{{ route('rentals.index') }}">{{ __('nav.rentals') }}</a>
-        <a href="{{ route('sales.index') }}">{{ __('nav.sales') }}</a>
-        <a href="{{ route('owners') }}">{{ __('nav.owners') }}</a>
-        <a href="{{ route('about') }}">{{ __('nav.about') }}</a>
-        <a href="{{ route('contact') }}">{{ __('nav.contact') }}</a>
+        <a href="{{ route('home', ['locale' => app()->getLocale()]) }}">{{ __('nav.home') }}</a>
+        <a href="{{ route('rentals.index', ['locale' => app()->getLocale()]) }}">{{ __('nav.rentals') }}</a>
+        <a href="{{ route('sales.index', ['locale' => app()->getLocale()]) }}">{{ __('nav.sales') }}</a>
+        <a href="{{ route('owners', ['locale' => app()->getLocale()]) }}">{{ __('nav.owners') }}</a>
+        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}">{{ __('nav.about') }}</a>
+        <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}">{{ __('nav.contact') }}</a>
+    </nav>
+
+    <nav aria-label="Language">
+        <a href="{{ url('/it' . request()->getPathInfoWithoutLocale()) }}">IT</a>
+        <a href="{{ url('/en' . request()->getPathInfoWithoutLocale()) }}">EN</a>
     </nav>
 </header>
 

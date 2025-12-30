@@ -6,22 +6,30 @@ use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\OwnersController;
 use App\Http\Controllers\Public\RentalsController;
 use App\Http\Controllers\Public\SalesController;
+use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::redirect('/', '/it');
 
-Route::prefix('affitti')->name('rentals.')->group(function () {
-    Route::get('/', [RentalsController::class, 'index'])->name('index');
-    Route::get('/{slug}', [RentalsController::class, 'show'])->name('show');
-});
+Route::prefix('{locale}')
+    ->where(['locale' => 'it|en'])
+    ->middleware([SetLocale::class])
+    ->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::prefix('vendite')->name('sales.')->group(function () {
-    Route::get('/', [SalesController::class, 'index'])->name('index');
-    Route::get('/{slug}', [SalesController::class, 'show'])->name('show');
-});
+        Route::prefix('affitti')->name('rentals.')->group(function () {
+            Route::get('/', [RentalsController::class, 'index'])->name('index');
+            Route::get('/{slug}', [RentalsController::class, 'show'])->name('show');
+        });
 
-Route::get('/diventa-proprietario', [OwnersController::class, 'index'])->name('owners');
-Route::get('/chi-siamo', [AboutController::class, 'index'])->name('about');
+        Route::prefix('vendite')->name('sales.')->group(function () {
+            Route::get('/', [SalesController::class, 'index'])->name('index');
+            Route::get('/{slug}', [SalesController::class, 'show'])->name('show');
+        });
 
-Route::get('/contatti', [ContactController::class, 'index'])->name('contact');
-Route::post('/contatti', [ContactController::class, 'submit'])->name('contact.submit');
+        Route::get('/diventa-proprietario', [OwnersController::class, 'index'])->name('owners');
+        Route::get('/chi-siamo', [AboutController::class, 'index'])->name('about');
+
+        Route::get('/contatti', [ContactController::class, 'index'])->name('contact');
+        Route::post('/contatti', [ContactController::class, 'submit'])->name('contact.submit');
+    });
