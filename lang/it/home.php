@@ -10,8 +10,9 @@ return [
         'subtitle' => 'Scopri le nostre strutture, esplora opportunità immobiliari e collabora con TreeHouse Italia per valorizzare il tuo patrimonio.',
         'cta_rentals' => 'Scopri le strutture',
         'cta_sales' => 'Esplora le vendite',
+        'cta_owners' => 'Sei un proprietario?',
         'card' => [
-            'title' => 'Sei un proprietario?',
+            'title' => 'Diventa proprietario partner',
             'text' => 'Gestione completa, report e trasparenza sui guadagni con GestioHouse.',
             'link' => 'Vedi come funziona',
         ],
@@ -49,6 +50,20 @@ return [
             'cta' => 'Scopri la partnership',
         ],
     ],
+    'featured' => [
+        'title' => 'In primo piano',
+        'subtitle' => 'Scopri subito alcune strutture e opportunità: la stessa importanza per affitti e vendite.',
+        'rentals' => [
+            'title' => 'Strutture',
+            'cta' => 'Vedi tutte',
+            'empty' => 'Nessuna struttura attiva al momento.',
+        ],
+        'sales' => [
+            'title' => 'Immobili in vendita',
+            'cta' => 'Vedi tutti',
+            'empty' => 'Nessun immobile attivo al momento.',
+        ],
+    ],
     'process' => [
         'title' => 'Come lavoriamo',
         'subtitle' => 'Un processo chiaro, pensato per creare valore e ridurre attriti: per ospiti, acquirenti e proprietari.',
@@ -56,7 +71,8 @@ return [
         's2' => ['title' => 'Valorizzazione', 'text' => 'Ottimizziamo presentazione, servizi e posizionamento.'],
         's3' => ['title' => 'Gestione', 'text' => 'Operatività completa: prenotazioni, pulizie, assistenza.'],
         's4' => ['title' => 'Report', 'text' => 'Misuriamo e condividiamo risultati in modo trasparente.'],
-        'cta' => 'Contattaci',
+        'cta_owners' => 'Diventa partner',
+        'cta_contact' => 'Contattaci',
     ],
     'story' => [
         'title' => 'La nostra storia in breve',

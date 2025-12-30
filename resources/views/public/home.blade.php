@@ -14,6 +14,7 @@
             <div class="hero__cta">
                 <a class="btn btn--primary" href="{{ route('rentals.index', ['locale' => app()->getLocale()]) }}">{{ __('home.hero.cta_rentals') }}</a>
                 <a class="btn btn--ghost" href="{{ route('sales.index', ['locale' => app()->getLocale()]) }}">{{ __('home.hero.cta_sales') }}</a>
+                <a class="btn btn--ghost" href="{{ route('owners', ['locale' => app()->getLocale()]) }}">{{ __('home.hero.cta_owners') }}</a>
             </div>
 
             <div class="hero__trust">
@@ -31,6 +32,7 @@
                 </div>
             </div>
         </div>
+
         <div class="hero__visual" aria-hidden="true">
             <div class="hero__card">
                 <div class="hero__cardTitle">{{ __('home.hero.card.title') }}</div>
@@ -75,7 +77,54 @@
                     <li>{{ __('home.entrypoints.owners.b2') }}</li>
                     <li>{{ __('home.entrypoints.owners.b3') }}</li>
                 </ul>
-                <a class="btn btn--primary" href="{{ route('owners', ['locale' => app()->getLocale()]) }}">{{ __('home.entrypoints.owners.cta') }}</a>
+                <a class="btn btn--ghost" href="{{ route('owners', ['locale' => app()->getLocale()]) }}">{{ __('home.entrypoints.owners.cta') }}</a>
+            </article>
+        </div>
+    </section>
+
+    <section class="featured">
+        <h2 class="sectionTitle">{{ __('home.featured.title') }}</h2>
+        <p class="sectionSubtitle">{{ __('home.featured.subtitle') }}</p>
+
+        <div class="featured__grid">
+            <article class="panel">
+                <div class="panel__head">
+                    <h3 class="panel__title">{{ __('home.featured.rentals.title') }}</h3>
+                    <a class="link" href="{{ route('rentals.index', ['locale' => app()->getLocale()]) }}">{{ __('home.featured.rentals.cta') }}</a>
+                </div>
+
+                @if(($featuredStructures ?? collect())->count() === 0)
+                    <p class="muted">{{ __('home.featured.rentals.empty') }}</p>
+                @else
+                    <ul class="miniList">
+                        @foreach($featuredStructures as $s)
+                            <li class="miniItem">
+                                <a class="miniItem__title" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'slug' => $s->slug]) }}">{{ $s->name }}</a>
+                                <div class="miniItem__meta">{{ $s->location }}</div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            </article>
+
+            <article class="panel panel--accent">
+                <div class="panel__head">
+                    <h3 class="panel__title">{{ __('home.featured.sales.title') }}</h3>
+                    <a class="link" href="{{ route('sales.index', ['locale' => app()->getLocale()]) }}">{{ __('home.featured.sales.cta') }}</a>
+                </div>
+
+                @if(($featuredSales ?? collect())->count() === 0)
+                    <p class="muted">{{ __('home.featured.sales.empty') }}</p>
+                @else
+                    <ul class="miniList">
+                        @foreach($featuredSales as $p)
+                            <li class="miniItem">
+                                <a class="miniItem__title" href="{{ route('sales.show', ['locale' => app()->getLocale(), 'slug' => $p->slug]) }}">{{ $p->title }}</a>
+                                <div class="miniItem__meta">{{ $p->location }}</div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
             </article>
         </div>
     </section>
@@ -104,7 +153,8 @@
         </ol>
 
         <div class="process__cta">
-            <a class="btn btn--primary" href="{{ route('contact', ['locale' => app()->getLocale()]) }}">{{ __('home.process.cta') }}</a>
+            <a class="btn btn--primary" href="{{ route('owners', ['locale' => app()->getLocale()]) }}">{{ __('home.process.cta_owners') }}</a>
+            <a class="btn btn--ghost" href="{{ route('contact', ['locale' => app()->getLocale()]) }}">{{ __('home.process.cta_contact') }}</a>
         </div>
     </section>
 

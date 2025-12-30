@@ -10,8 +10,9 @@ return [
         'subtitle' => 'Discover our structures, explore sales opportunities and work with TreeHouse Italia to enhance your assets.',
         'cta_rentals' => 'Discover structures',
         'cta_sales' => 'Explore sales',
+        'cta_owners' => 'Are you an owner?',
         'card' => [
-            'title' => 'Are you an owner?',
+            'title' => 'Become a partner owner',
             'text' => 'End-to-end management, reporting and transparent earnings with GestioHouse.',
             'link' => 'See how it works',
         ],
@@ -49,6 +50,20 @@ return [
             'cta' => 'Discover partnership',
         ],
     ],
+    'featured' => [
+        'title' => 'Featured',
+        'subtitle' => 'Quick picks: equal importance for rentals and sales.',
+        'rentals' => [
+            'title' => 'Structures',
+            'cta' => 'View all',
+            'empty' => 'No active structures yet.',
+        ],
+        'sales' => [
+            'title' => 'Properties for sale',
+            'cta' => 'View all',
+            'empty' => 'No active properties yet.',
+        ],
+    ],
     'process' => [
         'title' => 'How we work',
         'subtitle' => 'A clear process designed to create value and reduce friction for guests, buyers and owners.',
@@ -56,7 +71,8 @@ return [
         's2' => ['title' => 'Enhancement', 'text' => 'We optimize presentation, services and positioning.'],
         's3' => ['title' => 'Management', 'text' => 'Full operations: bookings, housekeeping, support.'],
         's4' => ['title' => 'Reporting', 'text' => 'We measure and share results transparently.'],
-        'cta' => 'Contact us',
+        'cta_owners' => 'Become a partner',
+        'cta_contact' => 'Contact us',
     ],
     'story' => [
         'title' => 'Our story in short',
