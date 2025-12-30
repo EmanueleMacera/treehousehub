@@ -10,6 +10,9 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // Temporaneo: usa home minimal per debug ModSecurity
+        return view('public.home_minimal');
+
         $featuredStructures = Structure::query()
             ->where('active', true)
             ->orderBy('sort_order')
