@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', __('site.brand'))</title>
+
+    @if (trim($__env->yieldContent('canonical')))
+        <link rel="canonical" href="@yield('canonical')">
+    @endif
 </head>
 <body>
 <header>

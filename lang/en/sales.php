@@ -3,15 +3,18 @@
 return [
     'meta' => [
         'title' => 'Sales',
-        'detail_title' => 'Sale: :slug',
     ],
     'hero' => [
         'title' => 'Sales',
-        'subtitle' => 'Work in progress: properties for sale will be integrated.',
+        'subtitle' => 'Discover properties for sale.',
     ],
-    'placeholder' => 'Content coming soon.',
-    'detail' => [
-        'title' => 'Sales detail',
-        'placeholder' => 'Work in progress page for ":slug".',
+    'empty' => 'No properties available at the moment.',
+    'actions' => [
+        'discover' => 'View details',
+        'back' => 'Back to list',
+    ],
+    'fields' => [
+        'location' => 'Location',
+        'price' => 'Price',
     ],
 ];

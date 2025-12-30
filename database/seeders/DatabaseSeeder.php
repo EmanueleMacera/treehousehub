@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             StructureSeeder::class,
+            SalePropertySeeder::class,
+            PageSeeder::class,
         ]);
     }
 }

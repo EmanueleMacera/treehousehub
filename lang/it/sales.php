@@ -3,15 +3,18 @@
 return [
     'meta' => [
         'title' => 'Vendite',
-        'detail_title' => 'Vendita: :slug',
     ],
     'hero' => [
         'title' => 'Vendite',
-        'subtitle' => 'Sezione in costruzione: verranno integrati gli immobili in vendita.',
+        'subtitle' => 'Scopri le opportunità immobiliari in vendita.',
     ],
-    'placeholder' => 'Contenuti in arrivo.',
-    'detail' => [
-        'title' => 'Dettaglio vendita',
-        'placeholder' => 'Pagina in costruzione per ":slug".',
+    'empty' => 'Al momento non ci sono immobili disponibili.',
+    'actions' => [
+        'discover' => 'Vedi dettaglio',
+        'back' => 'Torna alla lista',
+    ],
+    'fields' => [
+        'location' => 'Località',
+        'price' => 'Prezzo',
     ],
 ];
