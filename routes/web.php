@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Public\HomeController;
-use App\Http\Controllers\Public\RentalsController;
-use App\Http\Controllers\Public\SalesController;
-use App\Http\Controllers\Public\OwnersController;
 use App\Http\Controllers\Public\AboutController;
 use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\OwnersController;
+use App\Http\Controllers\Public\RentalsController;
+use App\Http\Controllers\Public\SalesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
