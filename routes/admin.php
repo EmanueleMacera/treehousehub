@@ -3,11 +3,12 @@
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SalePropertyController;
 use App\Http\Controllers\Admin\StructureController;
+use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')
     ->name('admin.')
-    ->middleware(['auth'])
+    ->middleware(['auth', EnsureAdmin::class])
     ->group(function () {
         Route::redirect('/', '/admin/pages/about')->name('home');
 
