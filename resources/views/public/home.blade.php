@@ -53,7 +53,7 @@
 <p class="section-subtitle">Tre percorsi chiari per guidarti subito verso ciò che ti serve: ospitalità esclusiva, immobili in vendita, o partnership gestionale.</p>
 </header>
 <div class="pathway-grid">
-<article class="pathway-card pathway-card--rentals">
+<article class="pathway-card">
 <div class="pathway-card__icon">🏡</div>
 <h3 class="pathway-card__title">Affitti Turistici</h3>
 <p class="pathway-card__desc">Scopri le nostre <strong>strutture ricettive curate</strong>: dal primo albergo diffuso della Liguria ai resort sul mare. Prenotazione diretta sui siti ufficiali.</p>
@@ -66,7 +66,7 @@
 <a class="btn btn--primary" href="{{ route('rentals.index', ['locale' => app()->getLocale()]) }}">Esplora le strutture</a>
 </article>
 
-<article class="pathway-card pathway-card--sales">
+<article class="pathway-card">
 <div class="pathway-card__icon">🏛️</div>
 <h3 class="pathway-card__title">Immobili in Vendita</h3>
 <p class="pathway-card__desc">Immobili di <strong>prestigio in contesti unici</strong>: castelli, ville storiche ed eleganti residenze sulla Riviera Ligure. Consulenza professionale dall'analisi alla proposta.</p>
@@ -79,7 +79,7 @@
 <a class="btn btn--primary" href="{{ route('sales.index', ['locale' => app()->getLocale()]) }}">Scopri le opportunità</a>
 </article>
 
-<article class="pathway-card pathway-card--owners">
+<article class="pathway-card">
 <div class="pathway-card__icon">🤝</div>
 <h3 class="pathway-card__title">Diventa Proprietario Partner</h3>
 <p class="pathway-card__desc">Affida il tuo immobile: gestiamo <strong>prenotazioni, pulizie, fiscalità e assistenza</strong>. Report trimestrali e assicurazione inclusa. <strong>Nessun costo a tuo carico</strong>.</p>
@@ -214,27 +214,57 @@
 <h2 class="section-title">La Nostra Storia</h2>
 <p class="section-subtitle">Un percorso di eccellenza: dai borghi storici liguri ai resort contemporanei, sempre con lo stesso impegno verso la qualità.</p>
 </header>
+<div class="timeline-wrapper">
+<div class="timeline-line"></div>
 <div class="timeline">
-<article class="timeline-card">
-<div class="timeline-card__year">Prima in Liguria</div>
-<h3 class="timeline-card__title">Colletta di Castelbianco</h3>
-<p class="timeline-card__text">Primo albergo diffuso della Regione Liguria: un borgo medievale restaurato con rispetto della storia e comfort contemporaneo.</p>
+<article class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<img src="{{ asset('images/colletta-castelbianco.jpg') }}" alt="Colletta di Castelbianco" class="timeline-image" onerror="this.outerHTML='<div class=timeline-image--placeholder>🏔️</div>'">
+<div class="timeline-body">
+<span class="timeline-year">1995 - Prima in Liguria</span>
+<h3 class="timeline-title">Colletta di Castelbianco</h3>
+<p class="timeline-text">Primo albergo diffuso della Regione Liguria: un borgo medievale restaurato con rispetto della storia e comfort contemporaneo.</p>
+</div>
+</div>
 </article>
-<article class="timeline-card">
-<div class="timeline-card__year">Mare & Design</div>
-<h3 class="timeline-card__title">Resort Dominio Mare</h3>
-<p class="timeline-card__text">San Sebastiano Bergeggi (SV): resort esclusivo affacciato sul mare, dove design contemporaneo incontra la tradizione ligure.</p>
+
+<article class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<img src="{{ asset('images/dominio-mare.jpg') }}" alt="Dominio Mare Bergeggi" class="timeline-image" onerror="this.outerHTML='<div class=timeline-image--placeholder>🌊</div>'">
+<div class="timeline-body">
+<span class="timeline-year">2010 - Mare & Design</span>
+<h3 class="timeline-title">Resort Dominio Mare</h3>
+<p class="timeline-text">San Sebastiano Bergeggi (SV): resort esclusivo affacciato sul mare, dove design contemporaneo incontra la tradizione ligure.</p>
+</div>
+</div>
 </article>
-<article class="timeline-card">
-<div class="timeline-card__year">Montagna</div>
-<h3 class="timeline-card__title">Borgo Fantino</h3>
-<p class="timeline-card__text">Limone Piemonte (CN): ospitalità montana di livello, per chi cerca relax e natura senza rinunciare ai servizi.</p>
+
+<article class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<img src="{{ asset('images/borgo-fantino.jpg') }}" alt="Borgo Fantino Limone" class="timeline-image" onerror="this.outerHTML='<div class=timeline-image--placeholder>⛰️</div>'">
+<div class="timeline-body">
+<span class="timeline-year">2018 - Montagna</span>
+<h3 class="timeline-title">Borgo Fantino</h3>
+<p class="timeline-text">Limone Piemonte (CN): ospitalità montana di livello, per chi cerca relax e natura senza rinunciare ai servizi.</p>
+</div>
+</div>
 </article>
-<article class="timeline-card">
-<div class="timeline-card__year">Storia & Vista Mare</div>
-<h3 class="timeline-card__title">Castello Borelli</h3>
-<p class="timeline-card__text">Borghetto S.Spirito (SV): castello storico con panorama sul mare, simbolo della nostra capacità di valorizzare il patrimonio.</p>
+
+<article class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<img src="{{ asset('images/castello-borelli.jpg') }}" alt="Castello Borelli" class="timeline-image" onerror="this.outerHTML='<div class=timeline-image--placeholder>🏰</div>'">
+<div class="timeline-body">
+<span class="timeline-year">2022 - Storia & Vista Mare</span>
+<h3 class="timeline-title">Castello Borelli</h3>
+<p class="timeline-text">Borghetto S.Spirito (SV): castello storico con panorama sul mare, simbolo della nostra capacità di valorizzare il patrimonio.</p>
+</div>
+</div>
 </article>
+</div>
 </div>
 </section>
 
@@ -248,4 +278,18 @@
 </div>
 </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+const timelineItems=document.querySelectorAll('.timeline-item');
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('visible');
+}
+});
+},{threshold:0.2});
+timelineItems.forEach(item=>observer.observe(item));
+});
+</script>
 @endsection
