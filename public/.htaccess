@@ -23,3 +23,9 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Disable ModSecurity response body inspection for this site
+<IfModule mod_security2.c>
+    SecResponseBodyAccess Off
+    SecRuleEngine Off
+</IfModule>
