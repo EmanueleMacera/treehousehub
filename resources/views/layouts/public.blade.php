@@ -8,6 +8,12 @@
 @if (trim($__env->yieldContent('canonical')))
 <link rel="canonical" href="@yield('canonical')">
 @endif
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="TreeHouse Italia" />
+<link rel="manifest" href="/site.webmanifest" />
 <link rel="stylesheet" href="{{ asset('css/styles.css') }}?v={{ config('app.version') }}">
 </head>
 <body>
