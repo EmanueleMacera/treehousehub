@@ -8,7 +8,7 @@
 @if (trim($__env->yieldContent('canonical')))
 <link rel="canonical" href="@yield('canonical')">
 @endif
-<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}?v={{ config('app.version') }}">
 </head>
 <body>
 <header class="topbar">
