@@ -1,0 +1,409 @@
+/* ========================================
+   ABOUT PAGE STYLES
+======================================== */
+
+/* About Hero */
+.about-hero {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.about-hero__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .about-hero__inner {
+    padding: 0 48px;
+  }
+}
+
+.about-hero__kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 16px;
+}
+
+.about-hero__title {
+  font-size: clamp(42px, 5.5vw, 58px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 40px;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+}
+
+.about-hero__lead {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.about-hero__lead p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.about-hero__lead strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.about-hero__mission {
+  background: linear-gradient(135deg, var(--sand), var(--white));
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  border-left: 4px solid var(--terracotta);
+  border-radius: var(--radius-lg);
+  padding: 40px 48px;
+  margin-top: 50px;
+}
+
+.about-hero__mission h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--navy);
+}
+
+.about-hero__mission p {
+  font-size: 19px;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.about-hero__mission strong {
+  color: var(--terracotta);
+  font-weight: 600;
+}
+
+/* Milestones Section */
+.milestones {
+  padding: 100px 0;
+  background: var(--sand);
+}
+
+.milestones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (min-width: 768px) {
+  .milestones-grid {
+    padding: 0 48px;
+  }
+}
+
+.milestone-card {
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.milestone-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--terracotta), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.milestone-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+  border-color: var(--terracotta);
+}
+
+.milestone-card:hover::before {
+  transform: scaleX(1);
+}
+
+.milestone-card__year {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--terracotta);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.milestone-card__title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.milestone-card__text {
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-size: 15px;
+}
+
+/* Team Section */
+.team-section {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.team-grid {
+  display: grid;
+  gap: 48px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (min-width: 768px) {
+  .team-grid {
+    padding: 0 48px;
+  }
+}
+
+.team-member {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  background: var(--off-white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+@media (min-width: 768px) {
+  .team-member {
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+  }
+}
+
+.team-member:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--terracotta);
+}
+
+.team-member__photo {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-member__photo-placeholder {
+  font-size: 80px;
+  opacity: 0.3;
+}
+
+.team-member__role {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 8px;
+}
+
+.team-member__name {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.team-member__title {
+  font-size: 16px;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.team-member__bio {
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.team-member__bio p {
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.team-member__bio strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.team-member__bio ul {
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.team-member__bio li {
+  padding: 10px 0 10px 28px;
+  position: relative;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.team-member__bio li:last-child {
+  border-bottom: none;
+}
+
+.team-member__bio li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--terracotta);
+  font-weight: 700;
+}
+
+/* Company Values Showcase */
+.company-values {
+  padding: 100px 0;
+  background: var(--sand);
+}
+
+.values-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (min-width: 768px) {
+  .values-showcase {
+    padding: 0 48px;
+  }
+}
+
+.value-showcase {
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-lg);
+  padding: 50px 40px;
+  text-align: center;
+  transition: all 0.3s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.value-showcase:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--terracotta);
+}
+
+.value-showcase__icon {
+  font-size: 60px;
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+.value-showcase__title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+
+.value-showcase__text {
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* About CTA */
+.about-cta {
+  padding: 100px 0;
+  text-align: center;
+  background: var(--white);
+}
+
+.about-cta__content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 60px;
+  background: linear-gradient(135deg, var(--sand), rgba(159, 180, 199, 0.1));
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.about-cta__title {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.about-cta__text {
+  font-size: 18px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+
+.about-cta__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Responsive About Page */
+@media (max-width: 768px) {
+  .milestones-grid,
+  .values-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .team-member {
+    grid-template-columns: 1fr;
+  }
+
+  .team-member__photo {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .about-cta__content,
+  .about-hero__mission {
+    padding: 50px 32px;
+  }
+}
