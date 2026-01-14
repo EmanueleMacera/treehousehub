@@ -16,6 +16,7 @@
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="stylesheet" href="{{ asset('css/styles.css') }}?v={{ config('app.version') }}">
 <link rel="stylesheet" href="{{ asset('css/about-page.css') }}?v={{ config('app.version') }}">
+<link rel="stylesheet" href="{{ asset('css/contact-page.css') }}?v={{ config('app.version') }}">
 </head>
 <body>
 <header class="topbar">
