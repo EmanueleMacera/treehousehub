@@ -37,20 +37,24 @@
 
 <section class="trust-bar">
 <div class="trust-item">
+<div class="trust-item__icon">📅</div>
 <div class="trust-item__value">30+ anni</div>
-<div class="trust-item__label">Esperienza settore</div>
+<div class="trust-item__label">Esperienza nel settore immobiliare e hospitality</div>
 </div>
 <div class="trust-item">
+<div class="trust-item__icon">🏝️</div>
 <div class="trust-item__value">4 destinazioni</div>
 <div class="trust-item__label">Iconiche in Liguria e Piemonte</div>
 </div>
 <div class="trust-item">
-<div class="trust-item__value">Gestione end-to-end</div>
-<div class="trust-item__label">Check-in, pulizie, fiscalità</div>
+<div class="trust-item__icon">⚙️</div>
+<div class="trust-item__value">End-to-end</div>
+<div class="trust-item__label">Check-in, pulizie, manutenzione e fiscalità</div>
 </div>
 <div class="trust-item">
-<div class="trust-item__value">Assicurati</div>
-<div class="trust-item__label">Ogni soggiorno coperto</div>
+<div class="trust-item__icon">🛡️</div>
+<div class="trust-item__value">100% protetti</div>
+<div class="trust-item__label">Ogni soggiorno coperto da assicurazione</div>
 </div>
 </section>
 
