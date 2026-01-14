@@ -64,7 +64,11 @@
 <div class="team-grid">
 <article class="team-member">
 <div class="team-member__photo">
+@if(file_exists(public_path('images/team/carlo-pampirio.jpg')))
+<img src="{{ asset('images/team/carlo-pampirio.jpg') }}" alt="Carlo Pampirio" class="team-member__photo-img">
+@else
 <div class="team-member__photo-placeholder">👤</div>
+@endif
 </div>
 <div class="team-member__content">
 <div class="team-member__role">Founder & CEO</div>
@@ -83,7 +87,11 @@
 
 <article class="team-member">
 <div class="team-member__photo">
+@if(file_exists(public_path('images/team/alessandro-pampirio.jpg')))
+<img src="{{ asset('images/team/alessandro-pampirio.jpg') }}" alt="Alessandro Pampirio" class="team-member__photo-img">
+@else
 <div class="team-member__photo-placeholder">👤</div>
+@endif
 </div>
 <div class="team-member__content">
 <div class="team-member__role">Chief Operations Officer</div>
@@ -102,7 +110,11 @@
 
 <article class="team-member">
 <div class="team-member__photo">
+@if(file_exists(public_path('images/team/franco-riccardi.jpg')))
+<img src="{{ asset('images/team/franco-riccardi.jpg') }}" alt="Franco Riccardi" class="team-member__photo-img">
+@else
 <div class="team-member__photo-placeholder">👤</div>
+@endif
 </div>
 <div class="team-member__content">
 <div class="team-member__role">Financial Director</div>
@@ -121,7 +133,11 @@
 
 <article class="team-member">
 <div class="team-member__photo">
+@if(file_exists(public_path('images/team/roberta-nattino.jpg')))
+<img src="{{ asset('images/team/roberta-nattino.jpg') }}" alt="Roberta Nattino" class="team-member__photo-img">
+@else
 <div class="team-member__photo-placeholder">👥</div>
+@endif
 </div>
 <div class="team-member__content">
 <div class="team-member__role">Marketing Manager</div>
@@ -136,7 +152,11 @@
 
 <article class="team-member">
 <div class="team-member__photo">
+@if(file_exists(public_path('images/team/stefania-vigorita.jpg')))
+<img src="{{ asset('images/team/stefania-vigorita.jpg') }}" alt="Stefania Vigorita" class="team-member__photo-img">
+@else
 <div class="team-member__photo-placeholder">👥</div>
+@endif
 </div>
 <div class="team-member__content">
 <div class="team-member__role">Customer Relations</div>

@@ -21,7 +21,13 @@
 <body>
 <header class="topbar">
 <div class="topbar__inner">
-<a class="brand" href="{{ route('home', ['locale' => app()->getLocale()]) }}">TreeHouse Italia</a>
+<a class="brand" href="{{ route('home', ['locale' => app()->getLocale()]) }}">
+@if(file_exists(public_path('images/logo-treehouse.png')))
+<img src="{{ asset('images/logo-treehouse.png') }}" alt="TreeHouse Italia" class="brand__logo">
+@else
+TreeHouse Italia
+@endif
+</a>
 
 <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
 <span class="mobile-toggle__line"></span>
