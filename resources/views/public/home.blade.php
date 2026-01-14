@@ -8,6 +8,11 @@
 
 @section('content')
 <section class="hero-main">
+<div class="hero-bg">
+<img src="{{ asset('images/hero-riviera-ligure.jpg') }}" alt="Riviera Ligure - TreeHouse Italia" class="hero-bg__image" onerror="this.outerHTML='<div class=hero-bg__image--placeholder>🏛️</div>'">
+</div>
+<div class="hero-main__wrapper">
+<div class="hero-main__inner">
 <div class="hero-main__content">
 <p class="hero-main__kicker">Hospitality & Real Estate Liguria</p>
 <h1 class="hero-main__title">Il Piacere di Abitare</h1>
@@ -24,6 +29,8 @@
 <h3 class="hero-card__title">La tua casa,<br>il tuo guadagno</h3>
 <p class="hero-card__text">Gestione completa, report trimestrali e assicurazione inclusa. <strong>Senza costi a tuo carico</strong>.</p>
 <a class="hero-card__link" href="{{ route('owners', ['locale' => app()->getLocale()]) }}">Scopri come &rarr;</a>
+</div>
+</div>
 </div>
 </div>
 </section>
