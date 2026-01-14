@@ -70,7 +70,7 @@ a:hover {
 }
 
 /* ========================================
-   TOPBAR
+   TOPBAR & MOBILE NAVIGATION
 ======================================== */
 
 .topbar {
@@ -89,7 +89,9 @@ a:hover {
   justify-content: space-between;
   gap: 24px;
   padding: 20px 32px;
-  flex-wrap: wrap;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
 }
 
 @media (min-width: 768px) {
@@ -103,8 +105,49 @@ a:hover {
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--navy);
+  z-index: 102;
 }
 
+/* Mobile Toggle Button (Hamburger) */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 102;
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  .mobile-toggle {
+    display: flex;
+  }
+}
+
+.mobile-toggle__line {
+  width: 24px;
+  height: 2px;
+  background: var(--navy);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.mobile-toggle.active .mobile-toggle__line:nth-child(1) {
+  transform: rotate(45deg) translateY(7px);
+}
+
+.mobile-toggle.active .mobile-toggle__line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-toggle.active .mobile-toggle__line:nth-child(3) {
+  transform: rotate(-45deg) translateY(-7px);
+}
+
+/* Navigation */
 .nav {
   display: flex;
   gap: 24px;
@@ -113,6 +156,43 @@ a:hover {
   font-size: 15px;
   font-weight: 500;
   color: var(--text-muted);
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 360px;
+    height: 100vh;
+    background: var(--white);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 32px 32px;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    z-index: 101;
+  }
+
+  .nav.active {
+    right: 0;
+  }
+
+  .nav a {
+    width: 100%;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 17px;
+  }
+
+  .nav .lang {
+    width: 100%;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 2px solid var(--sand);
+  }
 }
 
 .nav a {
@@ -148,6 +228,20 @@ a:hover {
   background: var(--navy);
   color: #fff;
   border-color: var(--navy);
+}
+
+/* Mobile Overlay */
+@media (max-width: 1024px) {
+  .nav.active::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
 }
 
 /* ========================================
@@ -237,6 +331,7 @@ a:hover {
 ======================================== */
 
 .hero-main {
+  position: relative;
   padding: 0;
   min-height: 85vh;
   display: flex;
@@ -251,22 +346,24 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg,
-    rgba(26, 35, 50, 0.7) 0%,
-    rgba(26, 35, 50, 0.75) 50%,
-    rgba(250, 250, 248, 0.6) 90%,
-    var(--off-white) 98%);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 35, 50, 0.92) 0%,
+    rgba(26, 35, 50, 0.85) 40%,
+    rgba(245, 241, 234, 0.95) 85%,
+    var(--off-white) 100%
+  );
   z-index: 1;
 }
 
 .hero-bg {
   position: absolute;
   top: 0;
-  left: 50%;
-  width: 100vw;
-  height: 100%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 0;
+  width: 100%;
 }
 
 .hero-bg__image {
@@ -425,50 +522,77 @@ a:hover {
 }
 
 /* ========================================
-   TRUST BAR
+   TRUST BAR - REDESIGNED
 ======================================== */
 
 .trust-bar {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1px;
-  padding: 0;
-  background: rgba(0, 0, 0, 0.06);
-  border-radius: var(--radius);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  padding: 80px 32px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .trust-bar {
+    padding: 80px 48px;
+  }
 }
 
 .trust-item {
   background: var(--white);
-  padding: 40px 24px;
+  padding: 48px 32px;
   text-align: center;
-  transition: background 0.3s;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.trust-item:first-child {
-  border-top-left-radius: var(--radius);
-  border-bottom-left-radius: var(--radius);
-}
-
-.trust-item:last-child {
-  border-top-right-radius: var(--radius);
-  border-bottom-right-radius: var(--radius);
+.trust-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--terracotta), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
 .trust-item:hover {
-  background: var(--sand);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  border-color: var(--terracotta);
+}
+
+.trust-item:hover::before {
+  transform: scaleX(1);
+}
+
+.trust-item__icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  opacity: 0.9;
 }
 
 .trust-item__value {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--navy);
   margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 
 .trust-item__label {
-  font-size: 13px;
-  color: var(--text-dim);
-  line-height: 1.5;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 /* ========================================
@@ -1025,5 +1149,9 @@ a:hover {
   .timeline-item:nth-child(even) {
     padding: 0 0 0 80px;
     text-align: left;
+  }
+
+  .trust-bar {
+    grid-template-columns: 1fr;
   }
 }
