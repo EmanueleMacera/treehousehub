@@ -14,7 +14,7 @@
 <div class="hero-main__wrapper">
 <div class="hero-main__inner">
 <div class="hero-main__content">
-<p class="hero-main__kicker">Hospitality & Real Estate Liguria</p>
+<p class="hero-main__kicker">Hospitality & Real Estate</p>
 <h1 class="hero-main__title">Il Piacere di Abitare</h1>
 <p class="hero-main__lead">Tra mare e borghi storici, creiamo esperienze autentiche: <strong>gestione affitti turistici</strong>, <strong>immobili esclusivi in vendita</strong> e <strong>partnership con proprietari</strong>. Tradizione, design e valore nel tempo.</p>
 <div class="hero-main__cta">
