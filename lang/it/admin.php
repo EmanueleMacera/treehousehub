@@ -3,6 +3,7 @@
 return [
     'nav' => [
         'back_public' => 'Torna al sito',
+        'dashboard' => 'Dashboard',
         'about' => 'Chi siamo',
         'owners' => 'Diventa proprietario',
         'structures' => 'Strutture',
@@ -40,12 +41,37 @@ return [
             'name' => 'Nome',
             'slug' => 'Slug',
             'location' => 'Località',
+            'address' => 'Indirizzo',
             'external_url' => 'URL sito ufficiale',
+            'image' => 'Foto struttura',
+            'remove_image' => 'Rimuovi foto corrente',
             'description_short' => 'Descrizione breve',
             'description_long' => 'Descrizione estesa',
             'active' => 'Attiva',
             'order' => 'Ordine',
         ],
+    ],
+
+    'dashboard' => [
+        'title' => 'Dashboard amministrazione',
+        'ok' => 'OK',
+        'ko' => 'KO',
+        'stats' => [
+            'structures_total' => 'Strutture totali',
+            'structures_active' => 'Strutture attive',
+            'sales_total' => 'Immobili in vendita totali',
+            'sales_active' => 'Immobili in vendita attivi',
+            'admins_total' => 'Amministratori',
+        ],
+        'health' => [
+            'title' => 'Salute sistema',
+            'database' => 'Connessione database',
+            'storage_public_writable' => 'Storage pubblico scrivibile',
+            'app_key_set' => 'APP_KEY configurata',
+        ],
+        'quick_actions' => 'Azioni rapide',
+        'latest_structures' => 'Ultime strutture aggiornate',
+        'latest_sales' => 'Ultime vendite aggiornate',
     ],
     'sales' => [
         'index_title' => 'Vendite',
@@ -58,6 +84,7 @@ return [
             'title' => 'Titolo',
             'slug' => 'Slug',
             'location' => 'Località',
+            'address' => 'Indirizzo',
             'price' => 'Prezzo',
             'description_short' => 'Descrizione breve',
             'description_long' => 'Descrizione estesa',
