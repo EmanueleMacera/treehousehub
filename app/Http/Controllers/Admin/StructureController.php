@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Structure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class StructureController extends Controller
@@ -28,6 +29,10 @@ class StructureController extends Controller
             $data['slug'] = Str::slug($data['name']);
         }
 
+        if ($request->hasFile('image')) {
+            $data['image_path'] = $request->file('image')->store('structures', 'public');
+        }
+
         Structure::create($data);
 
         return redirect()->route('admin.structures.index')->with('status', __('admin.flash.saved'));
@@ -46,6 +51,20 @@ class StructureController extends Controller
             $data['slug'] = Str::slug($data['name']);
         }
 
+        if ($request->hasFile('image')) {
+            if ($structure->image_path) {
+                Storage::disk('public')->delete($structure->image_path);
+            }
+            $data['image_path'] = $request->file('image')->store('structures', 'public');
+        }
+
+        if ($request->boolean('remove_image')) {
+            if ($structure->image_path) {
+                Storage::disk('public')->delete($structure->image_path);
+            }
+            $data['image_path'] = null;
+        }
+
         $structure->update($data);
 
         return back()->with('status', __('admin.flash.saved'));
@@ -53,6 +72,10 @@ class StructureController extends Controller
 
     public function destroy(Structure $structure)
     {
+        if ($structure->image_path) {
+            Storage::disk('public')->delete($structure->image_path);
+        }
+
         $structure->delete();
         return redirect()->route('admin.structures.index')->with('status', __('admin.flash.deleted'));
     }
@@ -64,15 +87,24 @@ class StructureController extends Controller
             $uniqueSlugRule .= ',' . $ignoreId;
         }
 
-        return $request->validate([
+        $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', $uniqueSlugRule],
             'location' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
             'description_short' => ['nullable', 'string', 'max:500'],
             'description_long' => ['nullable', 'string'],
             'external_url' => ['nullable', 'url', 'max:255'],
+            'image' => ['nullable', 'image', 'max:4096'],
+            'remove_image' => ['nullable', 'boolean'],
             'active' => ['nullable', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
         ]);
+
+        unset($data['image'], $data['remove_image']);
+
+        $data['active'] = $request->boolean('active');
+
+        return $data;
     }
 }
