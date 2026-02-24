@@ -10,9 +10,11 @@ class Structure extends Model
         'name',
         'slug',
         'location',
+        'address',
         'description_short',
         'description_long',
         'external_url',
+        'image_path',
         'active',
         'sort_order',
     ];

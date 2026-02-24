@@ -3,11 +3,17 @@
 @section('title', __('admin.structures.create_title'))
 
 @section('content')
-    <h1>{{ __('admin.structures.create_title') }}</h1>
+    <h1 class="h3 mb-4">{{ __('admin.structures.create_title') }}</h1>
 
-    <form method="POST" action="{{ route('admin.structures.store') }}">
-        @csrf
-        @include('admin.structures.partials.form', ['structure' => null])
-        <button type="submit">{{ __('admin.actions.save') }}</button>
-    </form>
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form method="POST" action="{{ route('admin.structures.store') }}" class="row g-3" enctype="multipart/form-data">
+                @csrf
+                @include('admin.structures.partials.form', ['structure' => null])
+                <div>
+                    <button class="btn btn-primary" type="submit">{{ __('admin.actions.save') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
