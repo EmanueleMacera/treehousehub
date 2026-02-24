@@ -34,18 +34,6 @@ class DashboardController extends Controller
             'admins_total' => User::query()->where('is_admin', true)->count(),
         ];
 
-        $latestStructures = Structure::query()
-            ->select(['id', 'name', 'active', 'updated_at'])
-            ->latest('updated_at')
-            ->limit(5)
-            ->get();
-
-        $latestSales = SaleProperty::query()
-            ->select(['id', 'title', 'active', 'updated_at'])
-            ->latest('updated_at')
-            ->limit(5)
-            ->get();
-
-        return view('admin.dashboard', compact('health', 'stats', 'latestStructures', 'latestSales'));
+        return view('admin.dashboard', compact('health', 'stats'));
     }
 }

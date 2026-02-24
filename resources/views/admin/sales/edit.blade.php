@@ -4,19 +4,16 @@
 @section('page_title', __('admin.sales.edit_title', ['title' => $property->title]))
 
 @section('content')
-    <div class="mb-3">
-        <a class="btn btn-sm btn-outline-secondary" href="{{ route('admin.sales.index') }}">← Torna all'elenco</a>
-    </div>
+    <h1 class="h3 mb-4">{{ __('admin.sales.edit_title', ['title' => $property->title]) }}</h1>
 
-    <div class="card admin-card">
+    <div class="card shadow-sm border-0">
         <div class="card-body">
             <form method="POST" action="{{ route('admin.sales.update', ['sale' => $property]) }}" class="row g-3">
                 @csrf
                 @method('PUT')
                 @include('admin.sales.partials.form', ['property' => $property])
-                <div class="d-flex gap-2">
+                <div>
                     <button class="btn btn-primary" type="submit">{{ __('admin.actions.save') }}</button>
-                    <a class="btn btn-light border" href="{{ route('admin.sales.index') }}">Annulla</a>
                 </div>
             </form>
         </div>
