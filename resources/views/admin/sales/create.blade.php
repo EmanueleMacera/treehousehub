@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', __('admin.sales.create_title'))
+@section('page_title', __('admin.sales.create_title'))
 
 @section('content')
     <h1 class="h3 mb-4">{{ __('admin.sales.create_title') }}</h1>

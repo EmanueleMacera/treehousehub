@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', __('admin.sales.index_title'))
+@section('page_title', __('admin.sales.index_title'))
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">

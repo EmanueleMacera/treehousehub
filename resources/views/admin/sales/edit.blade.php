@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', __('admin.sales.edit_title', ['title' => $property->title]))
+@section('page_title', __('admin.sales.edit_title', ['title' => $property->title]))
 
 @section('content')
     <h1 class="h3 mb-4">{{ __('admin.sales.edit_title', ['title' => $property->title]) }}</h1>

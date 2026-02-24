@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', __('admin.structures.edit_title', ['name' => $structure->name]))
+@section('page_title', __('admin.structures.edit_title', ['name' => $structure->name]))
 
 @section('content')
     <h1 class="h3 mb-4">{{ __('admin.structures.edit_title', ['name' => $structure->name]) }}</h1>
