@@ -116,7 +116,7 @@
                         <ul>
                             @foreach($featuredStructures as $s)
                                 <li>
-                                    <a class="hm-featured-item" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'slug' => $s->slug]) }}">
+                                    <a class="hm-featured-item" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => $s->slug]) }}">
                                         @if($s->image_path)
                                             <img class="hm-thumb" src="{{ asset('storage/' . $s->image_path) }}" alt="{{ $s->name }}">
                                         @else
