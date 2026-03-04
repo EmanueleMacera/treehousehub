@@ -60,6 +60,7 @@ return [
             'structures_total' => 'Total structures',
             'structures_active' => 'Active structures',
             'sales_total' => 'Total sale properties',
+            'sales_active' => 'Active sale properties',
             'admins_total' => 'Administrators',
         ],
         'health' => [
@@ -68,6 +69,9 @@ return [
             'storage_public_writable' => 'Public storage writable',
             'app_key_set' => 'APP_KEY configured',
         ],
+        'quick_actions' => 'Quick actions',
+        'latest_structures' => 'Recently updated structures',
+        'latest_sales' => 'Recently updated sales',
     ],
     'sales' => [
         'index_title' => 'Sales',

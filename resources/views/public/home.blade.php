@@ -116,8 +116,17 @@
                         <ul>
                             @foreach($featuredStructures as $s)
                                 <li>
-                                    <a href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'slug' => $s->slug]) }}">{{ $s->name }}</a>
-                                    @if($s->location)<span>{{ $s->location }}</span>@endif
+                                    <a class="hm-featured-item" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'slug' => $s->slug]) }}">
+                                        @if($s->image_path)
+                                            <img class="hm-thumb" src="{{ asset('storage/' . $s->image_path) }}" alt="{{ $s->name }}">
+                                        @else
+                                            <span class="hm-thumb hm-thumb--placeholder">{{ mb_strtoupper(mb_substr($s->name, 0, 1)) }}</span>
+                                        @endif
+                                        <span class="hm-featured-copy">
+                                            <strong>{{ $s->name }}</strong>
+                                            @if($s->location)<small>{{ $s->location }}</small>@endif
+                                        </span>
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>
@@ -135,8 +144,13 @@
                         <ul>
                             @foreach($featuredSales as $p)
                                 <li>
-                                    <a href="{{ route('sales.show', ['locale' => app()->getLocale(), 'slug' => $p->slug]) }}">{{ $p->title }}</a>
-                                    @if($p->price)<span>€ {{ number_format($p->price, 0, ',', '.') }}</span>@endif
+                                    <a class="hm-featured-item" href="{{ route('sales.show', ['locale' => app()->getLocale(), 'slug' => $p->slug]) }}">
+                                        <span class="hm-thumb hm-thumb--placeholder">{{ mb_strtoupper(mb_substr($p->title, 0, 1)) }}</span>
+                                        <span class="hm-featured-copy">
+                                            <strong>{{ $p->title }}</strong>
+                                            @if($p->price)<small>€ {{ number_format($p->price, 0, ',', '.') }}</small>@endif
+                                        </span>
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>
