@@ -3,22 +3,51 @@
 @section('title', __('rentals.meta.title'))
 
 @section('content')
-    <h1>{{ __('rentals.hero.title') }}</h1>
-    <p>{{ __('rentals.hero.subtitle') }}</p>
+    <section class="rentals-hero">
+        <p class="rentals-hero__kicker">TreeHouse Collection</p>
+        <h1>{{ __('rentals.hero.title') }}</h1>
+        <p>{{ __('rentals.hero.subtitle') }}</p>
+    </section>
 
-    <section>
-        <h2>{{ __('rentals.list.title') }}</h2>
+    <section class="rentals-list-section">
+        <div class="rentals-list-head">
+            <h2>{{ __('rentals.list.title') }}</h2>
+            <span class="rentals-list-count">{{ $structures->count() }}</span>
+        </div>
 
-        <ul>
-            @foreach ($structures as $structure)
-                <li>
-                    <h3>{{ $structure->name }}</h3>
-                    @if($structure->description_short)
-                        <p>{{ $structure->description_short }}</p>
-                    @endif
-                    <a href="{{ route('rentals.show', $structure->slug) }}">{{ __('rentals.actions.discover') }}</a>
-                </li>
-            @endforeach
-        </ul>
+        @if($structures->count())
+            <div class="rentals-grid">
+                @foreach ($structures as $structure)
+                    <article class="rental-card">
+                        <a class="rental-card__media" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => $structure->slug]) }}">
+                            @if($structure->image_path)
+                                <img src="{{ asset('storage/' . $structure->image_path) }}" alt="{{ $structure->name }}">
+                            @else
+                                <span class="rental-card__placeholder">{{ mb_strtoupper(mb_substr($structure->name, 0, 1)) }}</span>
+                            @endif
+                        </a>
+
+                        <div class="rental-card__body">
+                            <h3>{{ $structure->name }}</h3>
+
+                            @if($structure->location || $structure->address)
+                                <p class="rental-card__meta">
+                                    @if($structure->location)<strong>{{ $structure->location }}</strong>@endif
+                                    @if($structure->address) · {{ $structure->address }} @endif
+                                </p>
+                            @endif
+
+                            <p class="rental-card__desc">{{ $structure->description_short ?: __('rentals.structure.placeholder_description') }}</p>
+
+                            <a class="rental-card__link" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => $structure->slug]) }}">
+                                {{ __('rentals.actions.discover') }}
+                            </a>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        @else
+            <div class="rentals-empty">{{ __('rentals.structure.placeholder_description') }}</div>
+        @endif
     </section>
 @endsection
