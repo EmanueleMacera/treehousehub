@@ -17,9 +17,10 @@ class RentalsController extends Controller
         return view('public.rentals.index', compact('structures'));
     }
 
-    public function show(Structure $structure)
+    public function show($structure)
     {
-        abort_unless($structure->active, 404);
+        $structure = $this->resolveStructure($structure);
+        abort_unless($structure?->active, 404);
 
         $otherStructures = Structure::query()
             ->where('active', true)
@@ -29,5 +30,18 @@ class RentalsController extends Controller
             ->get();
 
         return view('public.rentals.show', compact('structure', 'otherStructures'));
+    }
+
+    private function resolveStructure($value): ?Structure
+    {
+        if ($value instanceof Structure) {
+            return $value;
+        }
+
+        if (!is_string($value) || $value === '') {
+            return null;
+        }
+
+        return Structure::query()->where('slug', $value)->first();
     }
 }
