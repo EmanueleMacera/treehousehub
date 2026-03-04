@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Structure;
+use Illuminate\Support\Str;
 
 class RentalsController extends Controller
 {
@@ -17,12 +18,10 @@ class RentalsController extends Controller
         return view('public.rentals.index', compact('structures'));
     }
 
-    public function show(string $slug)
+    public function show($structure)
     {
-        $structure = Structure::query()
-            ->where('active', true)
-            ->where('slug', $slug)
-            ->firstOrFail();
+        $structure = $this->resolveStructure($structure);
+        abort_unless($structure?->active, 404);
 
         $otherStructures = Structure::query()
             ->where('active', true)
@@ -32,5 +31,33 @@ class RentalsController extends Controller
             ->get();
 
         return view('public.rentals.show', compact('structure', 'otherStructures'));
+    }
+
+    private function resolveStructure($value): ?Structure
+    {
+        if ($value instanceof Structure) {
+            return $value;
+        }
+
+        if (!is_string($value) || $value === '') {
+            return null;
+        }
+
+        $bySlug = Structure::query()->where('slug', $value)->first();
+        if ($bySlug) {
+            return $bySlug;
+        }
+
+        if (ctype_digit($value)) {
+            $byId = Structure::query()->whereKey((int) $value)->first();
+            if ($byId) {
+                return $byId;
+            }
+        }
+
+        return Structure::query()
+            ->whereNull('slug')
+            ->get()
+            ->first(fn (Structure $item) => Str::slug($item->name) === $value);
     }
 }
