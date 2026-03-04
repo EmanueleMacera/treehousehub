@@ -24,7 +24,7 @@ Route::prefix('{locale}')
 
         Route::prefix('affitti')->name('rentals.')->group(function () {
             Route::get('/', [RentalsController::class, 'index'])->name('index');
-            Route::get('/{slug}', [RentalsController::class, 'show'])->name('show');
+            Route::get('/{structure:slug}', [RentalsController::class, 'show'])->name('show');
         });
 
         Route::prefix('vendite')->name('sales.')->group(function () {

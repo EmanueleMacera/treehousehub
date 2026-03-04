@@ -15,6 +15,12 @@ return [
         'discover' => 'Scopri di più',
         'visit_official_site' => 'Vai al sito ufficiale',
     ],
+    'detail' => [
+        'kicker' => 'Dettaglio struttura',
+        'info_title' => 'Informazioni',
+        'location' => 'Località',
+        'address' => 'Indirizzo',
+    ],
     'other' => [
         'title' => 'Altre strutture',
     ],
