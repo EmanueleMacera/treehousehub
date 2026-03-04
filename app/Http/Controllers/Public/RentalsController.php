@@ -17,12 +17,9 @@ class RentalsController extends Controller
         return view('public.rentals.index', compact('structures'));
     }
 
-    public function show(string $slug)
+    public function show(Structure $structure)
     {
-        $structure = Structure::query()
-            ->where('active', true)
-            ->where('slug', $slug)
-            ->firstOrFail();
+        abort_unless($structure->active, 404);
 
         $otherStructures = Structure::query()
             ->where('active', true)
