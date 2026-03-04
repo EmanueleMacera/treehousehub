@@ -3,6 +3,7 @@
 return [
     'nav' => [
         'back_public' => 'Back to website',
+        'dashboard' => 'Dashboard',
         'about' => 'About',
         'owners' => 'Become an owner',
         'structures' => 'Structures',
@@ -40,12 +41,37 @@ return [
             'name' => 'Name',
             'slug' => 'Slug',
             'location' => 'Location',
+            'address' => 'Address',
             'external_url' => 'Official website URL',
+            'image' => 'Structure photo',
+            'remove_image' => 'Remove current photo',
             'description_short' => 'Short description',
             'description_long' => 'Long description',
             'active' => 'Active',
             'order' => 'Order',
         ],
+    ],
+
+    'dashboard' => [
+        'title' => 'Admin dashboard',
+        'ok' => 'OK',
+        'ko' => 'KO',
+        'stats' => [
+            'structures_total' => 'Total structures',
+            'structures_active' => 'Active structures',
+            'sales_total' => 'Total sale properties',
+            'sales_active' => 'Active sale properties',
+            'admins_total' => 'Administrators',
+        ],
+        'health' => [
+            'title' => 'System health',
+            'database' => 'Database connection',
+            'storage_public_writable' => 'Public storage writable',
+            'app_key_set' => 'APP_KEY configured',
+        ],
+        'quick_actions' => 'Quick actions',
+        'latest_structures' => 'Recently updated structures',
+        'latest_sales' => 'Recently updated sales',
     ],
     'sales' => [
         'index_title' => 'Sales',
@@ -58,6 +84,7 @@ return [
             'title' => 'Title',
             'slug' => 'Slug',
             'location' => 'Location',
+            'address' => 'Address',
             'price' => 'Price',
             'description_short' => 'Short description',
             'description_long' => 'Long description',

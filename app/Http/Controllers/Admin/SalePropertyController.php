@@ -64,7 +64,7 @@ class SalePropertyController extends Controller
             $uniqueSlugRule .= ',' . $ignoreId;
         }
 
-        return $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', $uniqueSlugRule],
             'location' => ['nullable', 'string', 'max:255'],
@@ -74,5 +74,9 @@ class SalePropertyController extends Controller
             'active' => ['nullable', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
         ]);
+
+        $data['active'] = $request->boolean('active');
+
+        return $data;
     }
 }
