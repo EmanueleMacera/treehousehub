@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Structure;
+use Illuminate\Support\Str;
 
 class RentalsController extends Controller
 {
@@ -42,6 +43,21 @@ class RentalsController extends Controller
             return null;
         }
 
-        return Structure::query()->where('slug', $value)->first();
+        $bySlug = Structure::query()->where('slug', $value)->first();
+        if ($bySlug) {
+            return $bySlug;
+        }
+
+        if (ctype_digit($value)) {
+            $byId = Structure::query()->whereKey((int) $value)->first();
+            if ($byId) {
+                return $byId;
+            }
+        }
+
+        return Structure::query()
+            ->whereNull('slug')
+            ->get()
+            ->first(fn (Structure $item) => Str::slug($item->name) === $value);
     }
 }

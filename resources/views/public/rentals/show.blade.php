@@ -62,7 +62,7 @@
             <div class="rental-related-grid">
                 @foreach($otherStructures as $s)
                     <article class="rental-related-card">
-                        <a href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => $s->slug]) }}">{{ $s->name }}</a>
+                        <a href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => ($s->slug ?: \Illuminate\Support\Str::slug($s->name))]) }}">{{ $s->name }}</a>
                     </article>
                 @endforeach
             </div>

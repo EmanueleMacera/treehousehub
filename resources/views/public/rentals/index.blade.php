@@ -19,7 +19,7 @@
             <div class="rentals-grid">
                 @foreach ($structures as $structure)
                     <article class="rental-card">
-                        <a class="rental-card__media" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => $structure->slug]) }}">
+                        <a class="rental-card__media" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => ($structure->slug ?: \Illuminate\Support\Str::slug($structure->name))]) }}">
                             @if($structure->image_path)
                                 <img src="{{ asset('storage/' . $structure->image_path) }}" alt="{{ $structure->name }}">
                             @else
@@ -39,7 +39,7 @@
 
                             <p class="rental-card__desc">{{ $structure->description_short ?: __('rentals.structure.placeholder_description') }}</p>
 
-                            <a class="rental-card__link" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => $structure->slug]) }}">
+                            <a class="rental-card__link" href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => ($structure->slug ?: \Illuminate\Support\Str::slug($structure->name))]) }}">
                                 {{ __('rentals.actions.discover') }}
                             </a>
                         </div>
