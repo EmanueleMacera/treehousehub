@@ -1,15 +1,22 @@
 /* ========================================
    TREEHOUSE ITALIA HUB - STYLES
-   Palette: Navy, Terracotta, Sand, Gold
+   Palette: Navy, Blue, Sky, Gold
 ======================================== */
 
 :root {
   --navy: #1a2332;
-  --sand: #f5f1ea;
-  --terracotta: #c17a6f;
+  --sand: radial-gradient(circle at 15% 20%, rgba(56, 132, 190, 0.12), transparent 55%), radial-gradient(circle at 85% 0%, rgba(92, 123, 168, 0.1), transparent 52%);
+  --sand-solid: #e8f1f8;
+  --terracotta: #2f5f8f;
+  --terracotta-rgb: 47, 95, 143;
+  --blue-deep: #17324d;
+  --blue-ink: #0f172a;
+  --blue-soft: #eef5f9;
+  --blue-border: #d8e5ef;
+  --blue-panel: #f6fafc;
   --stone: #8b8378;
-  --gold: #b8965f;
-  --blue-mist: #9fb4c7;
+  --gold: #9d8a62;
+  --blue-mist: #a9bccd;
   --white: #ffffff;
   --off-white: #fafaf8;
   --text: #2d3748;
@@ -78,7 +85,6 @@ a:hover {
   top: 0;
   z-index: 100;
   background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
@@ -192,7 +198,7 @@ a:hover {
     width: 100%;
     margin-top: 24px;
     padding-top: 24px;
-    border-top: 2px solid var(--sand);
+    border-top: 2px solid var(--sand-solid);
   }
 }
 
@@ -252,7 +258,7 @@ a:hover {
 .alert {
   margin: 28px 0;
   padding: 20px 24px;
-  background: rgba(193, 122, 111, 0.08);
+  background: rgba(var(--terracotta-rgb), 0.08);
   border-left: 3px solid var(--terracotta);
   border-radius: 8px;
 }
@@ -467,7 +473,6 @@ a:hover {
   border-radius: var(--radius-lg);
   padding: 30px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(10px);
   transition: all 0.4s ease;
 }
 
@@ -628,7 +633,7 @@ a:hover {
 
 .pathway-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
   gap: 32px;
 }
 
@@ -707,7 +712,7 @@ a:hover {
 
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
   gap: 40px;
 }
 
@@ -740,7 +745,7 @@ a:hover {
   align-items: center;
   margin-bottom: 28px;
   padding-bottom: 20px;
-  border-bottom: 2px solid var(--sand);
+  border-bottom: 2px solid var(--sand-solid);
 }
 
 .featured-panel__head h3 {
@@ -848,7 +853,7 @@ a:hover {
   justify-content: center;
   font-weight: 700;
   font-size: 20px;
-  box-shadow: 0 4px 12px rgba(193, 122, 111, 0.3);
+  box-shadow: 0 4px 12px rgba(var(--terracotta-rgb), 0.3);
 }
 
 .process-step__title {
@@ -1021,8 +1026,8 @@ a:hover {
 .timeline-image--placeholder {
   background: linear-gradient(
     135deg,
-    var(--sand),
-    rgba(193, 122, 111, 0.2)
+    var(--sand-solid),
+    rgba(var(--terracotta-rgb), 0.2)
   );
   display: flex;
   align-items: center;
@@ -1069,7 +1074,7 @@ a:hover {
   border: 4px solid var(--white);
   border-radius: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 0 0 4px rgba(193, 122, 111, 0.2);
+  box-shadow: 0 0 0 4px rgba(var(--terracotta-rgb), 0.2);
   z-index: 2;
 }
 
@@ -1136,6 +1141,11 @@ a:hover {
   grid-template-columns: 1fr;
   gap: 60px;
   align-items: center;
+}
+
+.hero-owners__content {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
@@ -1294,7 +1304,7 @@ a:hover {
 
 .service-blocks {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
   gap: 32px;
   max-width: 1240px;
   margin: 0 auto;
@@ -1366,7 +1376,7 @@ a:hover {
 
 .faq-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
   gap: 32px;
   max-width: 1240px;
   margin: 0 auto;
@@ -1428,7 +1438,7 @@ a:hover {
   max-width: 900px;
   margin: 0 auto;
   padding: 80px 60px;
-  background: linear-gradient(135deg, var(--sand), var(--white));
+  background: var(--sand), var(--white);
   border: 2px solid rgba(0, 0, 0, 0.06);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -1505,6 +1515,25 @@ a:hover {
   .final-cta__content {
     padding: 50px 32px;
   }
+
+  .hero-main__cta .btn,
+  .hero-owners__cta .btn,
+  .owners-cta__actions .btn,
+  .final-cta__actions .btn,
+  .process-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-owners__lead {
+    order: 4;
+    margin-bottom: 0;
+  }
+
+  .hero-owners__cta {
+    order: 3;
+    margin-bottom: 24px;
+  }
 }
 
 /* ========================================
@@ -1557,8 +1586,7 @@ a:hover {
   position: absolute;
   inset: -40px -20px auto;
   height: 280px;
-  background: radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.14), transparent 55%),
-              radial-gradient(circle at 85% 0%, rgba(96, 165, 250, 0.12), transparent 52%);
+  background: var(--sand);
   z-index: -1;
   pointer-events: none;
 }
@@ -1571,7 +1599,7 @@ a:hover {
 
 .hm-metric-card {
   background: rgba(255, 255, 255, 0.94);
-  border: 1px solid #e6edf8;
+  border: 1px solid var(--blue-border);
   border-radius: 18px;
   padding: 1rem;
   box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
@@ -1582,7 +1610,7 @@ a:hover {
   font-size: 1.15rem;
   font-weight: 750;
   letter-spacing: -0.02em;
-  color: #0f172a;
+  color: var(--blue-ink);
   margin-bottom: 0.25rem;
 }
 
@@ -1594,7 +1622,7 @@ a:hover {
 
 .hm-section {
   background: rgba(255, 255, 255, 0.92);
-  border: 1px solid #e6edf8;
+  border: 1px solid var(--blue-border);
   border-radius: 22px;
   padding: 1.25rem;
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
@@ -1608,7 +1636,7 @@ a:hover {
   margin: 0 0 0.3rem;
   font-size: clamp(1.35rem, 2vw, 1.75rem);
   letter-spacing: -0.03em;
-  color: #0b1324;
+  color: var(--blue-ink);
 }
 
 .hm-section-head p {
@@ -1629,19 +1657,19 @@ a:hover {
   gap: 0.7rem;
   padding: 1rem;
   border-radius: 16px;
-  border: 1px solid #e9eef7;
-  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  border: 1px solid var(--blue-border);
+  background: linear-gradient(180deg, #ffffff 0%, var(--blue-panel) 100%);
 }
 
 .hm-offer-card--accent {
-  background: linear-gradient(180deg, #f5faff 0%, #eef6ff 100%);
-  border-color: #dbeafe;
+  background: linear-gradient(180deg, #f7fbfd 0%, var(--blue-soft) 100%);
+  border-color: var(--blue-border);
 }
 
 .hm-offer-card h3 {
   margin: 0;
   font-size: 1.14rem;
-  color: #0f172a;
+  color: var(--blue-ink);
   letter-spacing: -0.01em;
 }
 
@@ -1666,7 +1694,7 @@ a:hover {
 }
 
 .hm-featured {
-  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  background: linear-gradient(180deg, var(--blue-panel) 0%, #ffffff 100%);
 }
 
 .hm-featured-grid {
@@ -1676,7 +1704,7 @@ a:hover {
 }
 
 .hm-featured-panel {
-  border: 1px solid #e1ebfb;
+  border: 1px solid var(--blue-border);
   border-radius: 16px;
   padding: 0.95rem;
   background: #ffffff;
@@ -1692,12 +1720,12 @@ a:hover {
 
 .hm-featured-head h3 {
   margin: 0;
-  color: #0f172a;
+  color: var(--blue-ink);
   font-size: 1.05rem;
 }
 
 .hm-featured-head a {
-  color: #2563eb;
+  color: var(--terracotta);
   font-size: 0.88rem;
   font-weight: 600;
 }
@@ -1739,8 +1767,8 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-  color: #1e3a8a;
+  background: linear-gradient(135deg, var(--blue-soft) 0%, var(--sand-solid) 100%);
+  color: var(--blue-deep);
   font-weight: 700;
 }
 
@@ -1750,7 +1778,7 @@ a:hover {
 }
 
 .hm-featured-copy strong {
-  color: #0f172a;
+  color: var(--blue-ink);
   font-size: 0.96rem;
   line-height: 1.2;
 }
@@ -1761,13 +1789,13 @@ a:hover {
 }
 
 .hm-process {
-  background: linear-gradient(135deg, #f8fbff 0%, #edf5ff 100%);
-  color: #0f172a;
-  border: 1px solid #dbeafe;
+  background: linear-gradient(135deg, var(--blue-panel) 0%, var(--blue-soft) 100%);
+  color: var(--blue-ink);
+  border: 1px solid var(--blue-border);
 }
 
 .hm-process .hm-section-head h2 {
-  color: #0f172a;
+  color: var(--blue-ink);
 }
 
 .hm-process .hm-section-head p,
@@ -1793,7 +1821,7 @@ a:hover {
 }
 
 .hm-values {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, var(--blue-panel) 100%);
 }
 
 .hm-values-grid {
@@ -1803,7 +1831,7 @@ a:hover {
 }
 
 .hm-values-grid article {
-  border: 1px solid #e8edf6;
+  border: 1px solid var(--blue-border);
   border-radius: 14px;
   padding: 0.95rem;
   background: #ffffff;
@@ -1812,7 +1840,7 @@ a:hover {
 .hm-values-grid h3 {
   margin-top: 0;
   margin-bottom: 0.3rem;
-  color: #0f172a;
+  color: var(--blue-ink);
   font-size: 1rem;
 }
 
@@ -1863,8 +1891,8 @@ a:hover {
   display: inline-flex;
   padding: 0.28rem 0.7rem;
   border-radius: 999px;
-  background: #eef6ff;
-  color: #2563eb;
+  background: var(--blue-soft);
+  color: var(--terracotta);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -1875,7 +1903,7 @@ a:hover {
   margin: 0.6rem 0 0.35rem;
   font-size: clamp(1.9rem, 4vw, 2.8rem);
   letter-spacing: -0.03em;
-  color: #0f172a;
+  color: var(--blue-ink);
 }
 
 .rentals-hero p {
@@ -1899,16 +1927,16 @@ a:hover {
 .rentals-list-head h2 {
   margin: 0;
   font-size: 1.25rem;
-  color: #0f172a;
+  color: var(--blue-ink);
 }
 
 .rentals-list-count {
   min-width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid #dbeafe;
-  background: #f8fbff;
-  color: #1d4ed8;
+  border: 1px solid var(--blue-border);
+  background: var(--blue-panel);
+  color: var(--terracotta);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1925,7 +1953,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   background: #fff;
-  border: 1px solid #e8edf6;
+  border: 1px solid var(--blue-border);
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
@@ -1935,7 +1963,7 @@ a:hover {
   display: block;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: #eff6ff;
+  background: var(--blue-soft);
 }
 
 .rental-card__media img {
@@ -1955,8 +1983,8 @@ a:hover {
   display: grid;
   place-items: center;
   font-size: 2rem;
-  color: #1e3a8a;
-  background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+  color: var(--blue-deep);
+  background: linear-gradient(135deg, var(--blue-soft) 0%, var(--sand-solid) 100%);
 }
 
 .rental-card__body {
@@ -1967,7 +1995,7 @@ a:hover {
 
 .rental-card__body h3 {
   margin: 0;
-  color: #0f172a;
+  color: var(--blue-ink);
   font-size: 1.08rem;
 }
 
@@ -1991,14 +2019,14 @@ a:hover {
   justify-content: center;
   border-radius: 999px;
   padding: 0.56rem 0.9rem;
-  border: 1px solid #dbeafe;
-  color: #1d4ed8;
+  border: 1px solid var(--blue-border);
+  color: var(--terracotta);
   font-weight: 600;
 }
 
 .rental-card__link:hover {
-  background: #eff6ff;
-  color: #1e40af;
+  background: var(--blue-soft);
+  color: var(--blue-deep);
 }
 
 .rentals-empty {
@@ -2032,8 +2060,8 @@ a:hover {
   display: inline-flex;
   padding: 0.26rem 0.7rem;
   border-radius: 999px;
-  background: #eef6ff;
-  color: #1d4ed8;
+  background: var(--blue-soft);
+  color: var(--terracotta);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -2044,7 +2072,7 @@ a:hover {
   margin: 0.6rem 0 0.25rem;
   font-size: clamp(2rem, 4.5vw, 3rem);
   letter-spacing: -0.03em;
-  color: #0f172a;
+  color: var(--blue-ink);
 }
 
 .rental-detail-hero__meta {
@@ -2062,7 +2090,7 @@ a:hover {
 .rental-detail-main,
 .rental-detail-box {
   background: #fff;
-  border: 1px solid #e8edf6;
+  border: 1px solid var(--blue-border);
   border-radius: 18px;
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
 }
@@ -2071,7 +2099,7 @@ a:hover {
   aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: 18px 18px 0 0;
-  background: #eff6ff;
+  background: var(--blue-soft);
 }
 
 .rental-detail-media img {
@@ -2085,8 +2113,8 @@ a:hover {
   display: grid;
   place-items: center;
   font-size: 2.6rem;
-  color: #1e3a8a;
-  background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+  color: var(--blue-deep);
+  background: linear-gradient(135deg, var(--blue-soft) 0%, var(--sand-solid) 100%);
 }
 
 .rental-detail-copy {
@@ -2102,7 +2130,7 @@ a:hover {
 .rental-detail-box h2 {
   margin-top: 0;
   margin-bottom: 0.7rem;
-  color: #0f172a;
+  color: var(--blue-ink);
   font-size: 1.08rem;
 }
 
@@ -2127,7 +2155,7 @@ a:hover {
 }
 
 .rental-detail-box li strong {
-  color: #0f172a;
+  color: var(--blue-ink);
 }
 
 .rental-detail-box__cta {
@@ -2136,13 +2164,13 @@ a:hover {
   justify-content: center;
   border-radius: 999px;
   padding: 0.65rem 1rem;
-  background: #0f172a;
+  background: var(--blue-ink);
   color: #fff;
   font-weight: 600;
 }
 
 .rental-detail-box__cta:hover {
-  background: #1e293b;
+  background: var(--blue-deep);
   color: #fff;
 }
 
@@ -2152,7 +2180,7 @@ a:hover {
 
 .rental-related h2 {
   margin: 0 0 0.7rem;
-  color: #0f172a;
+  color: var(--blue-ink);
 }
 
 .rental-related-grid {
@@ -2163,14 +2191,14 @@ a:hover {
 
 .rental-related-card {
   background: #fff;
-  border: 1px solid #e8edf6;
+  border: 1px solid var(--blue-border);
   border-radius: 12px;
   padding: 0.8rem 0.9rem;
 }
 
 .rental-related-card a {
   font-weight: 600;
-  color: #1e3a8a;
+  color: var(--terracotta);
 }
 
 @media (max-width: 1024px) {

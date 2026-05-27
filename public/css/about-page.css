@@ -57,7 +57,7 @@
 }
 
 .about-hero__mission {
-  background: linear-gradient(135deg, var(--sand), var(--white));
+  background: var(--sand), var(--white);
   border: 2px solid rgba(0, 0, 0, 0.06);
   border-left: 4px solid var(--terracotta);
   border-radius: var(--radius-lg);
@@ -358,7 +358,7 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 80px 60px;
-  background: linear-gradient(135deg, var(--sand), rgba(159, 180, 199, 0.1));
+  background: var(--sand), rgba(159, 180, 199, 0.1);
   border: 2px solid rgba(0, 0, 0, 0.06);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -405,5 +405,10 @@
   .about-cta__content,
   .about-hero__mission {
     padding: 50px 32px;
+  }
+
+  .about-cta__actions .btn {
+    width: 100%;
+    justify-content: center;
   }
 }

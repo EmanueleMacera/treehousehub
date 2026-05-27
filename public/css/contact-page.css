@@ -155,7 +155,7 @@
 .contact-form-header {
   margin-bottom: 36px;
   padding-bottom: 24px;
-  border-bottom: 2px solid var(--sand);
+  border-bottom: 2px solid var(--sand-solid);
 }
 
 .contact-form-header__title {
@@ -238,7 +238,7 @@
   outline: none;
   border-color: var(--terracotta);
   background: var(--white);
-  box-shadow: 0 0 0 3px rgba(193, 122, 111, 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--terracotta-rgb), 0.1);
 }
 
 .form-input--error {
@@ -303,7 +303,7 @@
 
 .contact-faq-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 32px;
   max-width: 1240px;
   margin: 0 auto;
@@ -398,7 +398,21 @@
     grid-template-columns: 1fr;
   }
 
+  .contact-form-wrapper {
+    order: 1;
+  }
+
+  .contact-info {
+    order: 2;
+  }
+
   .contact-faq-grid {
     grid-template-columns: 1fr;
+  }
+
+  .form-actions .btn,
+  .contact-cta-alt__actions .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
