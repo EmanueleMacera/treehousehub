@@ -24,6 +24,7 @@ class StructureController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateData($request);
+        $data = $this->normalizeTranslations($data);
 
         if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['name']);
@@ -46,6 +47,7 @@ class StructureController extends Controller
     public function update(Request $request, Structure $structure)
     {
         $data = $this->validateData($request, $structure->id);
+        $data = $this->normalizeTranslations($data);
 
         if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['name']);
@@ -88,12 +90,27 @@ class StructureController extends Controller
         }
 
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['nullable', 'string', 'max:255'],
+            'name_translations' => ['nullable', 'array'],
+            'name_translations.it' => ['required', 'string', 'max:255'],
+            'name_translations.en' => ['nullable', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', $uniqueSlugRule],
             'location' => ['nullable', 'string', 'max:255'],
+            'location_translations' => ['nullable', 'array'],
+            'location_translations.it' => ['nullable', 'string', 'max:255'],
+            'location_translations.en' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
+            'address_translations' => ['nullable', 'array'],
+            'address_translations.it' => ['nullable', 'string', 'max:255'],
+            'address_translations.en' => ['nullable', 'string', 'max:255'],
             'description_short' => ['nullable', 'string', 'max:500'],
+            'description_short_translations' => ['nullable', 'array'],
+            'description_short_translations.it' => ['nullable', 'string', 'max:500'],
+            'description_short_translations.en' => ['nullable', 'string', 'max:500'],
             'description_long' => ['nullable', 'string'],
+            'description_long_translations' => ['nullable', 'array'],
+            'description_long_translations.it' => ['nullable', 'string'],
+            'description_long_translations.en' => ['nullable', 'string'],
             'external_url' => ['nullable', 'url', 'max:255'],
             'image' => ['nullable', 'image', 'max:4096'],
             'remove_image' => ['nullable', 'boolean'],
@@ -106,5 +123,49 @@ class StructureController extends Controller
         $data['active'] = $request->boolean('active');
 
         return $data;
+    }
+
+    private function normalizeTranslations(array $data): array
+    {
+        $locales = ['it', 'en'];
+        $fields = ['name', 'location', 'address', 'description_short', 'description_long'];
+
+        foreach ($fields as $field) {
+            $translationKey = $field . '_translations';
+            $translations = [];
+
+            foreach ($locales as $locale) {
+                $value = $data[$translationKey][$locale] ?? null;
+                $value = is_string($value) ? trim($value) : null;
+
+                if ($field === 'description_long' && $value) {
+                    $value = $this->cleanRichText($value);
+                }
+
+                if ($value !== null && $value !== '' && $value !== '<p><br></p>') {
+                    $translations[$locale] = $value;
+                }
+            }
+
+            $data[$translationKey] = $translations ?: null;
+        }
+
+        $data['name'] = $data['name_translations']['it'] ?? $data['name'];
+        $data['location'] = $data['location_translations']['it'] ?? $data['location'] ?? null;
+        $data['address'] = $data['address_translations']['it'] ?? $data['address'] ?? null;
+        $data['description_short'] = $data['description_short_translations']['it'] ?? $data['description_short'] ?? null;
+        $data['description_long'] = $data['description_long_translations']['it'] ?? $data['description_long'] ?? null;
+
+        return $data;
+    }
+
+    private function cleanRichText(string $value): string
+    {
+        $allowedTags = '<p><br><strong><b><em><i><u><s><a><ul><ol><li><h2><h3><blockquote>';
+        $clean = strip_tags($value, $allowedTags);
+        $clean = preg_replace('/\s+on\w+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $clean) ?? $clean;
+        $clean = preg_replace('/\s+href\s*=\s*("|\')?\s*javascript:[^"\'>\s]+("|\')?/i', '', $clean) ?? $clean;
+
+        return $clean;
     }
 }

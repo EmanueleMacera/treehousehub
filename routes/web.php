@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Public\AboutController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\HomeController;

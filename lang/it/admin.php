@@ -6,8 +6,9 @@ return [
         'dashboard' => 'Dashboard',
         'about' => 'Chi siamo',
         'owners' => 'Diventa proprietario',
-        'structures' => 'Strutture',
+        'structures' => 'Affitti',
         'sales' => 'Vendite',
+        'categories' => 'Categorie',
         'logout' => 'Logout',
     ],
     'flash' => [
@@ -16,9 +17,14 @@ return [
     ],
     'actions' => [
         'save' => 'Salva',
+        'cancel' => 'Annulla',
+        'back' => 'Torna all\'elenco',
         'edit' => 'Modifica',
         'delete' => 'Elimina',
         'confirm_delete' => 'Confermi eliminazione?',
+    ],
+    'validation' => [
+        'check_fields' => 'Controlla i campi evidenziati prima di salvare.',
     ],
     'pages' => [
         'edit_title' => 'Modifica: :title',
@@ -31,11 +37,11 @@ return [
         ],
     ],
     'structures' => [
-        'index_title' => 'Strutture',
-        'create_title' => 'Nuova struttura',
-        'edit_title' => 'Modifica struttura: :name',
+        'index_title' => 'Affitti',
+        'create_title' => 'Nuovo affitto',
+        'edit_title' => 'Modifica affitto: :name',
         'actions' => [
-            'create' => 'Crea struttura',
+            'create' => 'Crea affitto',
         ],
         'fields' => [
             'name' => 'Nome',
@@ -54,11 +60,12 @@ return [
 
     'dashboard' => [
         'title' => 'Dashboard amministrazione',
+        'subtitle' => 'Panoramica rapida di affitti, vendite e stato del sito.',
         'ok' => 'OK',
         'ko' => 'KO',
         'stats' => [
-            'structures_total' => 'Strutture totali',
-            'structures_active' => 'Strutture attive',
+            'structures_total' => 'Affitti totali',
+            'structures_active' => 'Affitti attivi',
             'sales_total' => 'Immobili in vendita totali',
             'sales_active' => 'Immobili in vendita attivi',
             'admins_total' => 'Amministratori',
@@ -86,6 +93,12 @@ return [
             'location' => 'Località',
             'address' => 'Indirizzo',
             'price' => 'Prezzo',
+            'property_type' => 'Tipologia',
+            'rooms' => 'Locali',
+            'bathrooms' => 'Bagni',
+            'surface' => 'Mq commerciali',
+            'energy_class' => 'Classe energetica',
+            'condition' => 'Stato',
             'description_short' => 'Descrizione breve',
             'description_long' => 'Descrizione estesa',
             'active' => 'Attivo',

@@ -2,65 +2,96 @@
 
 @section('title', __('admin.dashboard.title'))
 @section('page_title', __('admin.dashboard.title'))
+@section('page_subtitle', __('admin.dashboard.subtitle'))
+
+@section('page_actions')
+    <a class="btn btn-primary btn-icon" href="{{ route('admin.structures.create') }}">
+        <i data-lucide="plus" class="admin-icon" aria-hidden="true"></i>
+        {{ __('admin.structures.actions.create') }}
+    </a>
+    <a class="btn btn-outline-primary btn-icon" href="{{ route('admin.sales.create') }}">
+        <i data-lucide="plus" class="admin-icon" aria-hidden="true"></i>
+        {{ __('admin.sales.actions.create') }}
+    </a>
+@endsection
 
 @section('content')
-    <div class="row g-3 mb-3">
-        <div class="col-12 col-md-6 col-xl-3">
-            <div class="card admin-card h-100">
-                <div class="card-body">
-                    <div class="text-muted small">{{ __('admin.dashboard.stats.structures_total') }}</div>
-                    <div class="display-6 fw-semibold">{{ $stats['structures_total'] }}</div>
-                </div>
-            </div>
+    <div class="admin-stat-grid">
+        <div class="admin-stat">
+            <span>{{ __('admin.dashboard.stats.structures_total') }}</span>
+            <strong>{{ $stats['structures_total'] }}</strong>
         </div>
-        <div class="col-12 col-md-6 col-xl-3">
-            <div class="card admin-card h-100">
-                <div class="card-body">
-                    <div class="text-muted small">{{ __('admin.dashboard.stats.structures_active') }}</div>
-                    <div class="display-6 fw-semibold">{{ $stats['structures_active'] }}</div>
-                </div>
-            </div>
+        <div class="admin-stat">
+            <span>{{ __('admin.dashboard.stats.structures_active') }}</span>
+            <strong>{{ $stats['structures_active'] }}</strong>
         </div>
-        <div class="col-12 col-md-6 col-xl-3">
-            <div class="card admin-card h-100">
-                <div class="card-body">
-                    <div class="text-muted small">{{ __('admin.dashboard.stats.sales_total') }}</div>
-                    <div class="display-6 fw-semibold">{{ $stats['sales_total'] }}</div>
-                </div>
-            </div>
+        <div class="admin-stat">
+            <span>{{ __('admin.dashboard.stats.sales_total') }}</span>
+            <strong>{{ $stats['sales_total'] }}</strong>
         </div>
-        <div class="col-12 col-md-6 col-xl-3">
-            <div class="card admin-card h-100">
-                <div class="card-body">
-                    <div class="text-muted small">{{ __('admin.dashboard.stats.sales_active') }}</div>
-                    <div class="display-6 fw-semibold">{{ $stats['sales_active'] }}</div>
-                </div>
-            </div>
+        <div class="admin-stat">
+            <span>{{ __('admin.dashboard.stats.sales_active') }}</span>
+            <strong>{{ $stats['sales_active'] }}</strong>
         </div>
     </div>
 
     <div class="row g-3 mb-3">
-        <div class="col-12 col-xl-6">
+        <div class="col-12 col-xl-5">
             <div class="card admin-card h-100">
-                <div class="card-header bg-white border-0 pb-0"><strong>{{ __('admin.dashboard.health.title') }}</strong></div>
                 <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between px-0"><span>{{ __('admin.dashboard.health.database') }}</span><span class="badge {{ $health['database'] ? 'text-bg-success' : 'text-bg-danger' }}">{{ $health['database'] ? __('admin.dashboard.ok') : __('admin.dashboard.ko') }}</span></li>
-                        <li class="list-group-item d-flex justify-content-between px-0"><span>{{ __('admin.dashboard.health.storage_public_writable') }}</span><span class="badge {{ $health['storage_public_writable'] ? 'text-bg-success' : 'text-bg-danger' }}">{{ $health['storage_public_writable'] ? __('admin.dashboard.ok') : __('admin.dashboard.ko') }}</span></li>
-                        <li class="list-group-item d-flex justify-content-between px-0"><span>{{ __('admin.dashboard.health.app_key_set') }}</span><span class="badge {{ $health['app_key_set'] ? 'text-bg-success' : 'text-bg-danger' }}">{{ $health['app_key_set'] ? __('admin.dashboard.ok') : __('admin.dashboard.ko') }}</span></li>
-                    </ul>
+                    <div class="admin-section-head">
+                        <h2 class="admin-panel-title h5">{{ __('admin.dashboard.health.title') }}</h2>
+                    </div>
+                    <div class="admin-list">
+                        <div class="admin-list-item">
+                            <span>{{ __('admin.dashboard.health.database') }}</span>
+                            <span class="admin-status {{ $health['database'] ? 'admin-status--on' : 'admin-status--off' }}">{{ $health['database'] ? __('admin.dashboard.ok') : __('admin.dashboard.ko') }}</span>
+                        </div>
+                        <div class="admin-list-item">
+                            <span>{{ __('admin.dashboard.health.storage_public_writable') }}</span>
+                            <span class="admin-status {{ $health['storage_public_writable'] ? 'admin-status--on' : 'admin-status--off' }}">{{ $health['storage_public_writable'] ? __('admin.dashboard.ok') : __('admin.dashboard.ko') }}</span>
+                        </div>
+                        <div class="admin-list-item">
+                            <span>{{ __('admin.dashboard.health.app_key_set') }}</span>
+                            <span class="admin-status {{ $health['app_key_set'] ? 'admin-status--on' : 'admin-status--off' }}">{{ $health['app_key_set'] ? __('admin.dashboard.ok') : __('admin.dashboard.ko') }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 col-xl-6">
+        <div class="col-12 col-xl-7">
             <div class="card admin-card h-100">
-                <div class="card-header bg-white border-0 pb-0"><strong>{{ __('admin.dashboard.quick_actions') }}</strong></div>
-                <div class="card-body d-grid gap-2">
-                    <a class="btn btn-primary" href="{{ route('admin.structures.create') }}">+ {{ __('admin.structures.actions.create') }}</a>
-                    <a class="btn btn-outline-primary" href="{{ route('admin.sales.create') }}">+ {{ __('admin.sales.actions.create') }}</a>
-                    <a class="btn btn-outline-secondary" href="{{ route('admin.structures.index') }}">{{ __('admin.nav.structures') }}</a>
-                    <a class="btn btn-outline-secondary" href="{{ route('admin.sales.index') }}">{{ __('admin.nav.sales') }}</a>
+                <div class="card-body">
+                    <div class="admin-section-head">
+                        <h2 class="admin-panel-title h5">{{ __('admin.dashboard.quick_actions') }}</h2>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-12 col-md-6">
+                            <a class="btn btn-primary w-100 btn-icon justify-content-center" href="{{ route('admin.structures.create') }}">
+                                <i data-lucide="home" class="admin-icon" aria-hidden="true"></i>
+                                {{ __('admin.structures.actions.create') }}
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <a class="btn btn-outline-primary w-100 btn-icon justify-content-center" href="{{ route('admin.sales.create') }}">
+                                <i data-lucide="euro" class="admin-icon" aria-hidden="true"></i>
+                                {{ __('admin.sales.actions.create') }}
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <a class="btn btn-light border w-100 btn-icon justify-content-center" href="{{ route('admin.structures.index') }}">
+                                <i data-lucide="list" class="admin-icon" aria-hidden="true"></i>
+                                {{ __('admin.nav.structures') }}
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <a class="btn btn-light border w-100 btn-icon justify-content-center" href="{{ route('admin.sales.index') }}">
+                                <i data-lucide="list" class="admin-icon" aria-hidden="true"></i>
+                                {{ __('admin.nav.sales') }}
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,37 +100,47 @@
     <div class="row g-3">
         <div class="col-12 col-xl-6">
             <div class="card admin-card h-100">
-                <div class="card-header bg-white border-0 pb-0"><strong>{{ __('admin.dashboard.latest_structures') }}</strong></div>
                 <div class="card-body">
-                    @forelse($latestStructures as $item)
-                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                            <div>
-                                <a href="{{ route('admin.structures.edit', $item) }}" class="text-decoration-none fw-semibold">{{ $item->name }}</a>
-                                <div class="small text-muted">{{ $item->updated_at?->format('d/m/Y H:i') }}</div>
+                    <div class="admin-section-head">
+                        <h2 class="admin-panel-title h5">{{ __('admin.dashboard.latest_structures') }}</h2>
+                        <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.structures.index') }}">{{ __('admin.nav.structures') }}</a>
+                    </div>
+                    <div class="admin-list">
+                        @forelse($latestStructures as $item)
+                            <div class="admin-list-item">
+                                <div class="admin-title-cell">
+                                    <a href="{{ route('admin.structures.edit', $item) }}" class="text-decoration-none fw-semibold">{{ $item->name }}</a>
+                                    <small>{{ $item->updated_at?->format('d/m/Y H:i') }}</small>
+                                </div>
+                                <span class="admin-status {{ $item->active ? 'admin-status--on' : 'admin-status--off' }}">{{ $item->active ? 'ON' : 'OFF' }}</span>
                             </div>
-                            <span class="badge {{ $item->active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $item->active ? 'ON' : 'OFF' }}</span>
-                        </div>
-                    @empty
-                        <div class="text-muted">Nessuna struttura presente.</div>
-                    @endforelse
+                        @empty
+                            <div class="admin-empty"><strong>Nessun affitto presente.</strong></div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-12 col-xl-6">
             <div class="card admin-card h-100">
-                <div class="card-header bg-white border-0 pb-0"><strong>{{ __('admin.dashboard.latest_sales') }}</strong></div>
                 <div class="card-body">
-                    @forelse($latestSales as $item)
-                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                            <div>
-                                <a href="{{ route('admin.sales.edit', ['sale' => $item]) }}" class="text-decoration-none fw-semibold">{{ $item->title }}</a>
-                                <div class="small text-muted">{{ $item->updated_at?->format('d/m/Y H:i') }}</div>
+                    <div class="admin-section-head">
+                        <h2 class="admin-panel-title h5">{{ __('admin.dashboard.latest_sales') }}</h2>
+                        <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.sales.index') }}">{{ __('admin.nav.sales') }}</a>
+                    </div>
+                    <div class="admin-list">
+                        @forelse($latestSales as $item)
+                            <div class="admin-list-item">
+                                <div class="admin-title-cell">
+                                    <a href="{{ route('admin.sales.edit', ['sale' => $item]) }}" class="text-decoration-none fw-semibold">{{ $item->title }}</a>
+                                    <small>{{ $item->updated_at?->format('d/m/Y H:i') }}</small>
+                                </div>
+                                <span class="admin-status {{ $item->active ? 'admin-status--on' : 'admin-status--off' }}">{{ $item->active ? 'ON' : 'OFF' }}</span>
                             </div>
-                            <span class="badge {{ $item->active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $item->active ? 'ON' : 'OFF' }}</span>
-                        </div>
-                    @empty
-                        <div class="text-muted">Nessuna vendita presente.</div>
-                    @endforelse
+                        @empty
+                            <div class="admin-empty"><strong>Nessuna vendita presente.</strong></div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>

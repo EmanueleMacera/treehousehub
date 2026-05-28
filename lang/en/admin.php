@@ -6,8 +6,9 @@ return [
         'dashboard' => 'Dashboard',
         'about' => 'About',
         'owners' => 'Become an owner',
-        'structures' => 'Structures',
+        'structures' => 'Rentals',
         'sales' => 'Sales',
+        'categories' => 'Categories',
         'logout' => 'Logout',
     ],
     'flash' => [
@@ -16,9 +17,14 @@ return [
     ],
     'actions' => [
         'save' => 'Save',
+        'cancel' => 'Cancel',
+        'back' => 'Back to list',
         'edit' => 'Edit',
         'delete' => 'Delete',
         'confirm_delete' => 'Confirm deletion?',
+    ],
+    'validation' => [
+        'check_fields' => 'Check the highlighted fields before saving.',
     ],
     'pages' => [
         'edit_title' => 'Edit: :title',
@@ -31,11 +37,11 @@ return [
         ],
     ],
     'structures' => [
-        'index_title' => 'Structures',
-        'create_title' => 'New structure',
-        'edit_title' => 'Edit structure: :name',
+        'index_title' => 'Rentals',
+        'create_title' => 'New rental',
+        'edit_title' => 'Edit rental: :name',
         'actions' => [
-            'create' => 'Create structure',
+            'create' => 'Create rental',
         ],
         'fields' => [
             'name' => 'Name',
@@ -54,6 +60,7 @@ return [
 
     'dashboard' => [
         'title' => 'Admin dashboard',
+        'subtitle' => 'A quick overview of rentals, sales and website status.',
         'ok' => 'OK',
         'ko' => 'KO',
         'stats' => [
@@ -86,6 +93,12 @@ return [
             'location' => 'Location',
             'address' => 'Address',
             'price' => 'Price',
+            'property_type' => 'Property type',
+            'rooms' => 'Rooms',
+            'bathrooms' => 'Bathrooms',
+            'surface' => 'Commercial sqm',
+            'energy_class' => 'Energy class',
+            'condition' => 'Condition',
             'description_short' => 'Short description',
             'description_long' => 'Long description',
             'active' => 'Active',

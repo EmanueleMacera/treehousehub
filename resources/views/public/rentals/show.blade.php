@@ -1,15 +1,23 @@
 @extends('layouts.public')
 
-@section('title', $structure->name)
+@php
+    $structureName = $structure->localized('name') ?? $structure->name;
+    $structureLocation = $structure->localized('location');
+    $structureAddress = $structure->localized('address');
+    $structureLong = $structure->localized('description_long');
+    $structureShort = $structure->localized('description_short');
+@endphp
+
+@section('title', $structureName)
 
 @section('content')
     <section class="rental-detail-hero">
         <p class="rental-detail-hero__kicker">{{ __('rentals.detail.kicker') }}</p>
-        <h1>{{ $structure->name }}</h1>
-        @if($structure->location || $structure->address)
+        <h1>{{ $structureName }}</h1>
+        @if($structureLocation || $structureAddress)
             <p class="rental-detail-hero__meta">
-                @if($structure->location)<strong>{{ $structure->location }}</strong>@endif
-                @if($structure->address) · {{ $structure->address }} @endif
+                @if($structureLocation)<strong>{{ $structureLocation }}</strong>@endif
+                @if($structureAddress) &middot; {{ $structureAddress }} @endif
             </p>
         @endif
     </section>
@@ -18,17 +26,17 @@
         <article class="rental-detail-main">
             <div class="rental-detail-media">
                 @if($structure->image_path)
-                    <img src="{{ asset('storage/' . $structure->image_path) }}" alt="{{ $structure->name }}">
+                    <img src="{{ asset('storage/' . $structure->image_path) }}" alt="{{ $structureName }}">
                 @else
-                    <div class="rental-detail-media__placeholder">{{ mb_strtoupper(mb_substr($structure->name, 0, 1)) }}</div>
+                    <div class="rental-detail-media__placeholder">{{ mb_strtoupper(mb_substr($structureName, 0, 1)) }}</div>
                 @endif
             </div>
 
             <div class="rental-detail-copy">
-                @if($structure->description_long)
-                    <p>{{ $structure->description_long }}</p>
-                @elseif($structure->description_short)
-                    <p>{{ $structure->description_short }}</p>
+                @if($structureLong)
+                    {!! $structureLong !!}
+                @elseif($structureShort)
+                    <p>{{ $structureShort }}</p>
                 @else
                     <p>{{ __('rentals.structure.placeholder_description') }}</p>
                 @endif
@@ -39,11 +47,11 @@
             <div class="rental-detail-box">
                 <h2>{{ __('rentals.detail.info_title') }}</h2>
                 <ul>
-                    @if($structure->location)
-                        <li><span>{{ __('rentals.detail.location') }}</span><strong>{{ $structure->location }}</strong></li>
+                    @if($structureLocation)
+                        <li><span>{{ __('rentals.detail.location') }}</span><strong>{{ $structureLocation }}</strong></li>
                     @endif
-                    @if($structure->address)
-                        <li><span>{{ __('rentals.detail.address') }}</span><strong>{{ $structure->address }}</strong></li>
+                    @if($structureAddress)
+                        <li><span>{{ __('rentals.detail.address') }}</span><strong>{{ $structureAddress }}</strong></li>
                     @endif
                 </ul>
 
@@ -61,8 +69,9 @@
             <h2>{{ __('rentals.other.title') }}</h2>
             <div class="rental-related-grid">
                 @foreach($otherStructures as $s)
+                    @php($relatedName = $s->localized('name') ?? $s->name)
                     <article class="rental-related-card">
-                        <a href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => ($s->slug ?: \Illuminate\Support\Str::slug($s->name))]) }}">{{ $s->name }}</a>
+                        <a href="{{ route('rentals.show', ['locale' => app()->getLocale(), 'structure' => ($s->slug ?: \Illuminate\Support\Str::slug($s->name))]) }}">{{ $relatedName }}</a>
                     </article>
                 @endforeach
             </div>
