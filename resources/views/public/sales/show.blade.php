@@ -10,28 +10,26 @@
     @endphp
 
     <section class="sale-detail-hero">
-        @if($property->property_type)
-            <p class="sale-detail-hero__kicker">{{ str_replace('_', ' ', $property->property_type) }}</p>
-        @endif
+        <a class="sale-detail-backlink" href="{{ route('sales.index', ['locale' => app()->getLocale(), 'category' => $property->category_id]) }}">{{ __('sales.actions.back') }}</a>
+        <p class="sale-detail-hero__kicker">{{ $property->category?->name ?? ($property->property_type ? str_replace('_', ' ', $property->property_type) : $property->regionLabel()) }}</p>
         <h1>{{ $property->title }}</h1>
-        @if($property->category)
-            <p>{{ $property->category->type?->name ? $property->category->type->name . ' / ' : '' }}{{ $property->category->name }}</p>
-        @endif
-        @if($property->address || $property->location)
-            <p>{{ $property->address ?: $property->location }}</p>
-        @endif
+        <div class="sale-detail-hero__meta">
+            @if($property->category?->type)<span>{{ $property->category->type->name }}</span>@endif
+            @if($property->address || $property->location)<span>{{ $property->address ?: $property->location }}</span>@endif
+            @if(!is_null($property->price))<strong>EUR {{ number_format($property->price, 0, ',', '.') }}</strong>@endif
+        </div>
     </section>
 
     <section class="sale-detail-layout">
         <article class="sale-detail-main">
             @if($photos->count())
                 <div class="sale-gallery">
-                    <div class="sale-gallery__main">
+                    <a class="sale-gallery__main" href="{{ $photos->first()->url() }}" target="_blank" rel="noopener noreferrer">
                         <img src="{{ $photos->first()->url() }}" alt="{{ $property->title }}">
-                    </div>
+                    </a>
                     @if($photos->count() > 1)
                         <div class="sale-gallery__thumbs">
-                            @foreach($photos->skip(1)->take(8) as $photo)
+                            @foreach($photos->skip(1)->take(10) as $photo)
                                 <a href="{{ $photo->url() }}" target="_blank" rel="noopener noreferrer">
                                     <img src="{{ $photo->url() }}" alt="{{ $property->title }}">
                                 </a>
@@ -39,6 +37,10 @@
                         </div>
                     @endif
                 </div>
+            @endif
+
+            @if($property->summary())
+                <p class="sale-detail-lead">{{ $property->summary() }}</p>
             @endif
 
             <div class="sale-detail-summary">
@@ -68,16 +70,35 @@
                 @endif
             </div>
 
-            <div class="sale-detail-copy">
-                @if($property->localizedDescription())
+            @if($property->localizedDescription() || $property->description_short)
+                <div class="sale-detail-copy">
+                    <h2>{{ __('sales.detail.description') }}</h2>
+                    @if($property->localizedDescription())
                     {!! $property->localizedDescription() !!}
-                @elseif($property->description_short)
-                    <p>{{ $property->description_short }}</p>
-                @endif
-            </div>
+                    @elseif($property->description_short)
+                        <p>{{ $property->description_short }}</p>
+                    @endif
+                </div>
+            @endif
+
+            @if($property->nearby)
+                <div class="sale-detail-copy sale-detail-copy--muted">
+                    <h2>{{ __('sales.detail.nearby') }}</h2>
+                    <p>{{ $property->nearby }}</p>
+                </div>
+            @endif
         </article>
 
         <aside class="sale-detail-side">
+            <div class="sale-detail-box sale-detail-box--cta">
+                <span>{{ __('sales.detail.interest') }}</span>
+                <h2>{{ __('sales.detail.visit_title') }}</h2>
+                <a class="sale-detail-cta" href="{{ route('contact', ['locale' => app()->getLocale()]) }}">{{ __('sales.actions.contact') }}</a>
+                @if($property->contact_phone)
+                    <a class="sale-detail-phone" href="tel:{{ preg_replace('/\s+/', '', $property->contact_phone) }}">{{ $property->contact_phone }}</a>
+                @endif
+            </div>
+
             <div class="sale-detail-box">
                 <h2>{{ __('sales.detail.features') }}</h2>
                 <ul>
@@ -123,15 +144,12 @@
                 </div>
             @endif
 
-            @if($property->contact_name || $property->contact_phone)
+            @if($property->contact_name)
                 <div class="sale-detail-box">
                     <h2>{{ __('sales.detail.contact') }}</h2>
-                    @if($property->contact_name)<p>{{ $property->contact_name }}</p>@endif
-                    @if($property->contact_phone)<a class="sale-detail-cta" href="tel:{{ preg_replace('/\s+/', '', $property->contact_phone) }}">{{ $property->contact_phone }}</a>@endif
+                    <p>{{ $property->contact_name }}</p>
                 </div>
             @endif
-
-            <a class="sale-detail-back" href="{{ route('sales.index', ['locale' => app()->getLocale()]) }}">{{ __('sales.actions.back') }}</a>
         </aside>
     </section>
 @endsection

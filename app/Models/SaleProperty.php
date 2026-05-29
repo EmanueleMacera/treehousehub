@@ -90,7 +90,7 @@ class SaleProperty extends Model
         $translations = $this->description_translations ?? [];
         $value = $translations[$locale] ?? $translations['it'] ?? $translations['en'] ?? $this->description_long;
 
-        return is_string($value) && trim($value) !== '' ? $value : null;
+        return is_string($value) && trim($value) !== '' ? $this->cleanDisplayText($value) : null;
     }
 
     public function media(): HasMany
@@ -115,6 +115,33 @@ class SaleProperty extends Model
             ?? $this->media->first();
     }
 
+    public function publicRouteKey(): string
+    {
+        $key = $this->publicId();
+        $slug = $this->publicSlug();
+
+        return $key . ($slug !== '' ? '-' . $slug : '');
+    }
+
+    public function publicId(): int
+    {
+        return (int) $this->id;
+    }
+
+    public function publicSlug(): string
+    {
+        $slug = trim((string) $this->slug, '/');
+        $slug = preg_replace('/[^A-Za-z0-9]+/', '-', $slug) ?: '';
+        $slug = trim(strtolower($slug), '-');
+
+        $prefix = $this->publicId() . '-';
+        if (str_starts_with($slug, $prefix)) {
+            $slug = substr($slug, strlen($prefix));
+        }
+
+        return $slug;
+    }
+
     public function documentFiles(): array
     {
         return $this->normalizedFileList($this->pdf_files ?? []);
@@ -128,7 +155,7 @@ class SaleProperty extends Model
     public function summary(?string $locale = null): ?string
     {
         if ($this->description_short) {
-            return $this->description_short;
+            return $this->cleanDisplayText($this->description_short);
         }
 
         $description = $this->localizedDescription($locale);
@@ -136,7 +163,7 @@ class SaleProperty extends Model
             return null;
         }
 
-        return str($description)->stripTags()->squish()->limit(180)->toString();
+        return $this->cleanDisplayText(str($description)->stripTags()->squish()->limit(180)->toString());
     }
 
     public function featureList(): array
@@ -225,5 +252,15 @@ class SaleProperty extends Model
             ->filter()
             ->values()
             ->all();
+    }
+
+    private function cleanDisplayText(string $value): string
+    {
+        $value = str_replace('�', '', $value);
+
+        // Legacy imported emoji sometimes arrived as isolated question marks.
+        $value = preg_replace('/(^|[>.;:!]\s*)[\'"“”‘’]?\?\s*/u', '$1', $value) ?? $value;
+
+        return str($value)->squish()->toString();
     }
 }

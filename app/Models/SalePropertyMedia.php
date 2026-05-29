@@ -28,6 +28,20 @@ class SalePropertyMedia extends Model
 
     public function url(): ?string
     {
-        return $this->path ? asset('storage/' . ltrim($this->path, '/')) : null;
+        if (!$this->path) {
+            return null;
+        }
+
+        $path = ltrim($this->path, '/');
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        if (str_starts_with($path, 'storage/')) {
+            return asset($path);
+        }
+
+        return asset('storage/' . $path);
     }
 }

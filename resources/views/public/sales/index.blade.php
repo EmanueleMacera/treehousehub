@@ -24,70 +24,140 @@
         </a>
     </nav>
 
-    @if($categoryTypes->count())
-        <nav class="sales-filter sales-filter--categories" aria-label="Categorie vendite">
-            <a class="{{ !$macro && !$category ? 'active' : '' }}" href="{{ route('sales.index', ['locale' => app()->getLocale(), 'region' => $region]) }}">
-                Tutte le categorie
-            </a>
-            @foreach($categoryTypes as $type)
-                <a class="{{ (string) $macro === (string) $type->id ? 'active' : '' }}" href="{{ route('sales.index', ['locale' => app()->getLocale(), 'region' => $region, 'macro' => $type->id]) }}">
-                    {{ $type->name }}
-                    <span>{{ $type->sale_properties_count }}</span>
-                </a>
-                @foreach($type->categories as $filterCategory)
-                    <a class="sales-filter__child {{ (string) $category === (string) $filterCategory->id ? 'active' : '' }}" href="{{ route('sales.index', ['locale' => app()->getLocale(), 'region' => $region, 'category' => $filterCategory->id]) }}">
-                        {{ $filterCategory->name }}
-                    </a>
-                @endforeach
-            @endforeach
-        </nav>
-    @endif
+    <section class="sales-explorer" aria-label="Esplora immobili in vendita">
+        <aside class="sales-browser">
+            <div class="sales-browser__head">
+                <span>{{ __('sales.categories.kicker') }}</span>
+                <h2>{{ __('sales.categories.title') }}</h2>
+                <p>{{ __('sales.categories.prompt') }}</p>
+            </div>
 
-    @if($properties->count() === 0)
-        <div class="sales-empty">{{ __('sales.empty') }}</div>
-    @else
-        <section class="sales-grid">
-            @foreach($properties as $property)
-                @php($thumbnail = $property->thumbnail())
-                <article class="sale-card">
-                    @if($thumbnail?->url())
-                        <a class="sale-card__media" href="{{ route('sales.show', ['locale' => app()->getLocale(), 'slug' => $property->slug]) }}">
-                            <img src="{{ $thumbnail->url() }}" alt="{{ $property->title }}">
+            @if($showProperties)
+                <a class="sales-browser__reset" href="{{ route('sales.index', ['locale' => app()->getLocale(), 'region' => $region]) }}">{{ __('sales.categories.back') }}</a>
+            @endif
+
+            <div class="sales-browser__list">
+                @foreach($categoryGroups as $type)
+                    @php
+                        $typeUrl = route('sales.index', ['locale' => app()->getLocale(), 'region' => $region, 'macro' => $type->id]);
+                    @endphp
+                    <section class="sales-browser-group">
+                        <a class="sales-browser-group__title {{ (string) $macro === (string) $type->id ? 'active' : '' }}" href="{{ $typeUrl }}">
+                            <span>{{ $type->name }}</span>
+                            <strong>{{ $type->visible_sale_properties_count }}</strong>
                         </a>
-                    @endif
-                    <div class="sale-card__body">
-                        <div class="sale-card__head">
-                            <div>
-                                @if($property->property_type)
-                                    <span class="sale-card__type">{{ str_replace('_', ' ', $property->property_type) }}</span>
-                                @endif
-                                <h2>{{ $property->title }}</h2>
-                                <small class="sale-card__region">{{ $property->category?->name ?? $property->regionLabel() }}</small>
+
+                        @if($type->visibleCategories->count())
+                            <div class="sales-browser-group__items">
+                                @foreach($type->visibleCategories as $filterCategory)
+                                    <a class="{{ (string) $category === (string) $filterCategory->id ? 'active' : '' }}" href="{{ route('sales.index', ['locale' => app()->getLocale(), 'region' => $region, 'category' => $filterCategory->id]) }}">
+                                        <span>{{ $filterCategory->name }}</span>
+                                        <small>{{ $filterCategory->visible_sale_properties_count }}</small>
+                                    </a>
+                                @endforeach
                             </div>
-                            @if(!is_null($property->price))
-                                <strong class="sale-card__price">EUR {{ number_format($property->price, 0, ',', '.') }}</strong>
-                            @endif
-                        </div>
-
-                        @if($property->address || $property->location)
-                            <p class="sale-card__meta">{{ $property->address ?: $property->location }}</p>
                         @endif
+                    </section>
+                @endforeach
+            </div>
+        </aside>
 
-                        <p class="sale-card__desc">{{ $property->summary() }}</p>
-
-                        <div class="sale-card__facts">
-                            @if($property->rooms)<span>{{ $property->rooms }} {{ __('sales.fields.rooms') }}</span>@endif
-                            @if($property->bathrooms)<span>{{ $property->bathrooms }} {{ __('sales.fields.bathrooms') }}</span>@endif
-                            @if($property->surface_commercial)<span>{{ number_format((float) $property->surface_commercial, 0, ',', '.') }} mq</span>@endif
-                            @if($property->energy_class)<span>{{ __('sales.fields.energy_class') }} {{ $property->energy_class }}</span>@endif
-                        </div>
-
-                        <a class="sale-card__link" href="{{ route('sales.show', ['locale' => app()->getLocale(), 'slug' => $property->slug]) }}">
-                            {{ __('sales.actions.discover') }}
-                        </a>
+        <div class="sales-results-panel">
+            @if(!$showProperties)
+                <div class="sales-guide">
+                    <div class="sales-guide__copy">
+                        <span>{{ __('sales.guide.kicker') }}</span>
+                        <h2>{{ __('sales.guide.title') }}</h2>
+                        <p>{{ __('sales.guide.copy') }}</p>
                     </div>
-                </article>
-            @endforeach
-        </section>
-    @endif
+
+                    <div class="sales-guide__choices">
+                        @foreach($categoryGroups->take(4) as $type)
+                            @php
+                                $typePreview = $type->thumbnail?->url() ?: $type->previewProperty?->thumbnail()?->url();
+                                $typeUrl = route('sales.index', ['locale' => app()->getLocale(), 'region' => $region, 'macro' => $type->id]);
+                            @endphp
+                            <a class="sales-guide-card" href="{{ $typeUrl }}">
+                                <span class="sales-guide-card__media">
+                                    @if($typePreview)
+                                        <img src="{{ $typePreview }}" alt="{{ $type->name }}">
+                                    @else
+                                        {{ $type->name }}
+                                    @endif
+                                </span>
+                                <span class="sales-guide-card__body">
+                                    <strong>{{ $type->name }}</strong>
+                                    <small>{{ trans_choice('sales.categories.count', $type->visible_sale_properties_count, ['count' => $type->visible_sale_properties_count]) }}</small>
+                                </span>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @else
+                @if($properties->count() === 0)
+                    <div class="sales-empty">{{ __('sales.empty') }}</div>
+                @else
+                    <div class="sales-section-head sales-section-head--results">
+                        <div>
+                            <span>{{ __('sales.results.kicker') }}</span>
+                            <h2>{{ $selectedCategory?->name ?? $selectedMacro?->name ?? __('sales.results.title') }}</h2>
+                        </div>
+                        <p>{{ trans_choice('sales.results.count', $properties->count(), ['count' => $properties->count()]) }}</p>
+                    </div>
+
+                    <section class="sales-list">
+                        @foreach($properties as $property)
+                            @php
+                                $thumbnail = $property->thumbnail();
+                                $propertyUrl = route('sales.show', ['locale' => app()->getLocale(), 'sale' => $property->publicId()]);
+                            @endphp
+                            <article class="sale-card">
+                                <a class="sale-card__media" href="{{ $propertyUrl }}">
+                                    @if($thumbnail?->url())
+                                        <img src="{{ $thumbnail->url() }}" alt="{{ $property->title }}">
+                                    @else
+                                        <span>{{ $property->category?->name ?? $property->regionLabel() }}</span>
+                                    @endif
+                                </a>
+                                <div class="sale-card__body">
+                                    <div class="sale-card__head">
+                                        <div>
+                                            <span class="sale-card__type">{{ $property->category?->name ?? $property->regionLabel() }}</span>
+                                            <h2>{{ $property->title }}</h2>
+                                            @if($property->address || $property->location)
+                                                <small class="sale-card__region">{{ $property->address ?: $property->location }}</small>
+                                            @endif
+                                        </div>
+                                        @if(!is_null($property->price))
+                                            <strong class="sale-card__price">EUR {{ number_format($property->price, 0, ',', '.') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    @if($property->summary())
+                                        <p class="sale-card__desc">{{ $property->summary() }}</p>
+                                    @endif
+
+                                    <div class="sale-card__facts">
+                                        @if($property->rooms)<span>{{ $property->rooms }} {{ __('sales.fields.rooms') }}</span>@endif
+                                        @if($property->bathrooms)<span>{{ $property->bathrooms }} {{ __('sales.fields.bathrooms') }}</span>@endif
+                                        @if($property->surface_commercial)<span>{{ number_format((float) $property->surface_commercial, 0, ',', '.') }} mq</span>@endif
+                                        @if($property->energy_class)<span>{{ __('sales.fields.energy_class') }} {{ $property->energy_class }}</span>@endif
+                                    </div>
+
+                                    <div class="sale-card__footer">
+                                        @if($property->property_type)
+                                            <span>{{ str_replace('_', ' ', $property->property_type) }}</span>
+                                        @endif
+                                        <a class="sale-card__link" href="{{ $propertyUrl }}">
+                                        {{ __('sales.actions.discover') }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        @endforeach
+                    </section>
+                @endif
+            @endif
+        </div>
+    </section>
 @endsection

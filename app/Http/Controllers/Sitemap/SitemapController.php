@@ -26,8 +26,8 @@ class SitemapController extends Controller
                 $urls[] = url("/$locale/affitti/{$s->slug}");
             }
 
-            foreach (SaleProperty::query()->where('active', true)->get(['slug']) as $p) {
-                $urls[] = url("/$locale/vendite/{$p->slug}");
+            foreach (SaleProperty::query()->where('active', true)->get(['id']) as $p) {
+                $urls[] = url("/$locale/vendite/{$p->publicId()}");
             }
         }
 

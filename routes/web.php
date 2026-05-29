@@ -28,7 +28,10 @@ Route::prefix('{locale}')
 
         Route::prefix('vendite')->name('sales.')->group(function () {
             Route::get('/', [SalesController::class, 'index'])->name('index');
-            Route::get('/{slug}', [SalesController::class, 'show'])->name('show');
+            Route::get('/{sale}', [SalesController::class, 'showById'])
+                ->whereNumber('sale')
+                ->name('show');
+            Route::get('/{slug}', [SalesController::class, 'show'])->where('slug', '.*')->name('show.legacy');
         });
 
         Route::get('/diventa-proprietario', [OwnersController::class, 'index'])->name('owners');

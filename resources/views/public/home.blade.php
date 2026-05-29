@@ -111,7 +111,7 @@
                         <ul>
                             @foreach($featuredSales as $p)
                                 <li>
-                                    <a class="hm-featured-item" href="{{ route('sales.show', ['locale' => app()->getLocale(), 'slug' => $p->slug]) }}">
+                                    <a class="hm-featured-item" href="{{ route('sales.show', ['locale' => app()->getLocale(), 'sale' => $p->publicId()]) }}">
                                         <span class="hm-thumb hm-thumb--placeholder">{{ mb_strtoupper(mb_substr($p->title, 0, 1)) }}</span>
                                         <span class="hm-featured-copy">
                                             <strong>{{ $p->title }}</strong>

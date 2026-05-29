@@ -27,6 +27,16 @@ class CategoryTypeMedia extends Model
 
     public function url(): string
     {
-        return asset('storage/' . ltrim($this->path, '/'));
+        $path = ltrim($this->path, '/');
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        if (str_starts_with($path, 'storage/')) {
+            return asset($path);
+        }
+
+        return asset('storage/' . $path);
     }
 }
